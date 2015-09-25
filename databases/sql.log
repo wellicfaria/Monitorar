@@ -1,0 +1,97 @@
+timestamp: 2015-08-02T16:26:14.095941
+CREATE TABLE auth_user(
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    first_name CHAR(128),
+    last_name CHAR(128),
+    email CHAR(512),
+    password CHAR(512),
+    registration_key CHAR(512),
+    reset_password_key CHAR(512),
+    registration_id CHAR(512)
+);
+success!
+timestamp: 2015-08-02T16:26:14.395550
+CREATE TABLE auth_group(
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    role CHAR(512),
+    description TEXT
+);
+success!
+timestamp: 2015-08-02T16:26:14.716221
+CREATE TABLE auth_membership(
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    user_id INTEGER REFERENCES auth_user (id) ON DELETE CASCADE,
+    group_id INTEGER REFERENCES auth_group (id) ON DELETE CASCADE
+);
+success!
+timestamp: 2015-08-02T16:26:14.849643
+CREATE TABLE auth_permission(
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    group_id INTEGER REFERENCES auth_group (id) ON DELETE CASCADE,
+    name CHAR(512),
+    table_name CHAR(512),
+    record_id INTEGER
+);
+success!
+timestamp: 2015-08-02T16:26:15.049345
+CREATE TABLE auth_event(
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    time_stamp TIMESTAMP,
+    client_ip CHAR(512),
+    user_id INTEGER REFERENCES auth_user (id) ON DELETE CASCADE,
+    origin CHAR(512),
+    description TEXT
+);
+success!
+timestamp: 2015-08-02T16:26:15.215344
+CREATE TABLE auth_cas(
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    user_id INTEGER REFERENCES auth_user (id) ON DELETE CASCADE,
+    created_on TIMESTAMP,
+    service CHAR(512),
+    ticket CHAR(512),
+    renew CHAR(1)
+);
+success!
+timestamp: 2015-09-05T16:44:01.034053
+CREATE TABLE estados(
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    nome_estado CHAR(512),
+    abreviacao CHAR(512)
+);
+success!
+timestamp: 2015-09-05T16:44:01.228299
+CREATE TABLE cidades(
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    nome_cidade CHAR(512),
+    estado INTEGER REFERENCES estados (id) ON DELETE CASCADE
+);
+success!
+timestamp: 2015-09-05T16:44:01.723232
+CREATE TABLE sensor(
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    tipo_sensor CHAR(512),
+    unidade INTEGER REFERENCES estados (id) ON DELETE CASCADE
+);
+success!
+timestamp: 2015-09-05T16:44:02.146393
+CREATE TABLE hardwares(
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    descricao CHAR(512),
+    cidade INTEGER REFERENCES cidades (id) ON DELETE CASCADE,
+    latitude CHAR(512),
+    longitude CHAR(512),
+    sensores TEXT,
+    senha CHAR(512)
+);
+success!
+timestamp: 2015-09-05T16:44:28.834011
+CREATE TABLE leituras(
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    hardware INTEGER REFERENCES hardwares (id) ON DELETE CASCADE,
+    sensor INTEGER REFERENCES sensor (id) ON DELETE CASCADE,
+    valor DOUBLE,
+    data_leitura DATE,
+    hora_leitura TIME
+);
+success!
