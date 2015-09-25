@@ -1,3 +1,4 @@
 # Monitorar
-# Monitorar
-# Monitorar
+
+A plataforma MonitoAR, se insere nesse cenário de monitoramenteo da qualidade do ar como uma solução de custo mais baixo. Seu hardware possui sensores que medem os gases poluentes do ar e analisam sua qualidade dentro dos parâmetros estabelecidos pela OMS. As informações calculadas são enviadas pela plataforma via rede celular (módulo 3G) para serem acessadas via Web por qualquer dispositivo. A medição dos gases é feita em locais estratégicos de uma determinada cidade. A partir das medidas  coletadas  é feita  a analise  dos poluentes e um relatório é gerado com as especificações da qualidade do ar naquele local e momento. Essas informações compõe uma base de dados em tempo real. Caso o nível de algum poluente ultrapasse o limite estabelecido é emitida uma notificação aos usuários informando a localidade do evento.
+
