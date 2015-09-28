@@ -38,7 +38,7 @@ def user():
     form=auth()
     form.custom.widget.email.update(_placeholder="E-mail...")
     form.custom.widget.password.update(_placeholder="Senha...")
-    print( form.custom.widget.Submit)
+    print(form.vars)
     return {'form':form}
 
 
