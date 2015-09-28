@@ -4,7 +4,7 @@ jQuery(document).ready(function() {
     /*
         Fullscreen background
     */
-    $.backstretch("http://www.insurancequotes.org/wp-content/uploads/2012/01/pollution.jpg");
+    $.backstretch("http://res.cloudinary.com/db79cecgq/image/upload/c_crop,h_720,w_1440,y_91/c_fill,h_800,w_1600/v1423156747/Polui%C3%A7%C3%A3o-do-ar-pode-causar-mudan%C3%A7a-no-DNA_-diz-estudo-.jpg");
     
     /*
         Form validation

@@ -1,0 +1,385 @@
+(dp1
+S'output'
+p2
+S'missing "pass" in view'
+p3
+sS'layer'
+p4
+S'ParserContainer'
+p5
+sS'code'
+p6
+S'response.write(\'<!DOCTYPE html>\\n<html lang="en">\\n\\n<head>\\n\\n    <meta charset="utf-8">\\n    <meta http-equiv="X-UA-Compatible" content="IE=edge">\\n    <meta name="viewport" content="width=device-width, initial-scale=1">\\n    <meta name="description" content="">\\n    <meta name="author" content="">\\n\\n    <title>MonitorAR</title>\\n\\n    <!-- Bootstrap Core CSS -->\\n    <link href="\', escape=False)\nresponse.write(URL(\'static\',\'css/bootstrap.min.css\'))\nresponse.write(\'" rel="stylesheet">\\n\\n    <!-- Custom CSS -->\\n    <link href="\', escape=False)\nresponse.write(URL(\'static\',\'css/agency.css\'))\nresponse.write(\'" rel="stylesheet">\\n\\n    <!-- Custom Fonts -->\\n    <link href="\', escape=False)\nresponse.write(URL(\'static\',\'font-awesome/css/font-awesome.min.css\'))\nresponse.write(\'" rel="stylesheet" type="text/css">\\n    <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700" rel="stylesheet" type="text/css">\\n    <link href=\\\'https://fonts.googleapis.com/css?family=Kaushan+Script\\\' rel=\\\'stylesheet\\\' type=\\\'text/css\\\'>\\n    <link href=\\\'https://fonts.googleapis.com/css?family=Droid+Serif:400,700,400italic,700italic\\\' rel=\\\'stylesheet\\\' type=\\\'text/css\\\'>\\n    <link href=\\\'https://fonts.googleapis.com/css?family=Roboto+Slab:400,100,300,700\\\' rel=\\\'stylesheet\\\' type=\\\'text/css\\\'>\\n\\n    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->\\n    <!-- WARNING: Respond.js doesn\\\'t work if you view the page via file:// -->\\n    <!--[if lt IE 9]>\\n        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>\\n        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>\\n    <![endif]-->\\n\\n</head>\\n\\n<body id="page-top" class="index">\\n\', escape=False)\nif auth.user:\n    print(\'lalaal\')\n    response.write(\'\\n\\n    <!-- Navigation -->\\n    <nav class="navbar navbar-default navbar-fixed-top">\\n        <div class="container">\\n            <!-- Brand and toggle get grouped for better mobile display -->\\n            <div class="navbar-header page-scroll">\\n                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">\\n                    <span class="sr-only">Toggle navigation</span>\\n                    <span class="icon-bar"></span>\\n                    <span class="icon-bar"></span>\\n                    <span class="icon-bar"></span>\\n                </button>\\n                <a class="navbar-brand page-scroll" href="#page-top">MonitorAR</a>\\n            </div>\\n\\n            <!-- Collect the nav links, forms, and other content for toggling -->\\n            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">\\n                <ul class="nav navbar-nav navbar-right">\\n                    <li class="hidden">\\n                        <a href="#page-top"></a>\\n                    </li>\\n                    <li>\\n                        <a class="page-scroll" href="#services">Servi\\xc3\\xa7os</a>\\n                    </li>\\n                    <li>\\n                        <a class="page-scroll" href="#about">Sinais e Sintomas</a>\\n                    </li>\\n                    <li>\\n                        <a class="page-scroll" href="#team">Equipe</a>\\n                    </li>\\n                    <li>\\n                        <a class="page-scroll" href="#contact">Contato</a>\\n                    </li>\\n                     <li>\\n                        <a class="page-scroll" href="\', escape=False)\n    response.write(URL(c=\'default\',f=\'user\'))\n    response.write(\'">Login</a>\\n                    </li>\\n                </ul>\\n            </div>\\n            <!-- /.navbar-collapse -->\\n        </div>\\n        <!-- /.container-fluid -->\\n    </nav>\\n\\n    <!-- Header -->\\n    <header>\\n        <div class="container">\\n            <div class="intro-text">\\n                <div class="intro-lead-in">Bem vindo ao MonitorAR!</div>\\n                <div class="intro-heading">Estamos monitorando o ar que voc\\xc3\\xaa respira!</div>\\n                <a href="\', escape=False)\n    response.write(URL(c=\'default\',f=\'user\', args=[\'register\']))\n    response.write(\'" class="page-scroll btn btn-xl">Crie sua Conta!</a>\\n            </div>\\n        </div>\\n    </header>\\n\\n    <!-- Services Section -->\\n    <section id="services">\\n        <div class="container">\\n            <div class="row">\\n                <div class="col-lg-12 text-center">\\n                    <h2 class="section-heading">Servi\\xc3\\xa7os</h2>\\n                    <h3 class="section-subheading text-muted">O que fazemos?</h3>\\n                </div>\\n            </div>\\n            <div class="row text-center">\\n                <div class="col-md-4">\\n                    <span class="fa-stack fa-4x">\\n                        <i class="glyphicon glyphicon-pushpin text-primary"></i>\\n                     \\n                    </span>\\n                    <h4 class="service-heading">Mapeamos</h4>\\n                    <p class="text-muted">Mapeamento dos locais com maior emiss\\xc3\\xa3o de CO, CO\\xc2\\xb2 e Metano.</p>\\n                </div>\\n                <div class="col-md-4">\\n                    <span class="fa-stack fa-4x">\\n                        <i class="glyphicon glyphicon-bullhorn text-primary"></i>\\n                    </span>\\n                    <h4 class="service-heading">Alertamos</h4>\\n                    <p class="text-muted">Alertamos as autoridades respons\\xc3\\xa1veis para averigua\\xc3\\xa7\\xc3\\xa3o de irregularidades.</p>\\n                </div>\\n                <div class="col-md-4">\\n                    <span class="fa-stack fa-4x">\\n                        <i class="glyphicon glyphicon-scale text-primary"></i>\\n                     \\n                    </span>\\n                    <h4 class="service-heading">Medimos</h4>\\n                    <p class="text-muted">Medimos as quantidade de emiss\\xc3\\xa3o de CO, CO\\xc2\\xb2 e Metano.</p>\\n                </div>\\n            </div>\\n        </div>\\n    </section>\\n\\n  \\n\\n    <!-- About Section -->\\n    <section id="about">\\n        <div class="container">\\n            <div class="row">\\n                <div class="col-lg-12 text-center">\\n                    <h2 class="section-heading">Sinais e Sintomas</h2>\\n                    <h3 class="section-subheading text-muted">Sinais e sintomas relacionados \\xc3\\xa0 polui\\xc3\\xa7\\xc3\\xa3o do ar</h3>\\n                </div>\\n            </div>\\n            <div class="row">\\n                <div class="col-lg-12">\\n                    <ul class="timeline">\\n                        <li>\\n                            <div class="timeline-image">\\n                                <img class="img-circle img-responsive" src="\', escape=False)\n    response.write(URL(\'static\',\'images/dc.jpg\'))\n    response.write(\'" alt="">\\n                            </div>\\n                            <div class="timeline-panel">\\n                                <div class="timeline-heading">\\n                                    <h4>Dor de cabe\\xc3\\xa7a</h4>\\n                                </div>\\n                                <div class="timeline-body">\\n                                    <p class="text-muted">Dor de cabe\\xc3\\xa7a \\xc3\\xa9 a dor em qualquer regi\\xc3\\xa3o da cabe\\xc3\\xa7a. As dores de cabe\\xc3\\xa7a podem ocorrer em um ou em ambos os lados da cabe\\xc3\\xa7a, serem isoladas em determinada localiza\\xc3\\xa7\\xc3\\xa3o, irradiarem pela cabe\\xc3\\xa7a de um ponto ou a outro, serem latejantes ou uma sensa\\xc3\\xa7\\xc3\\xa3o de dor surda. As dores de cabe\\xc3\\xa7a podem aparecer gradualmente ou de repente, e podem durar menos de uma hora ou durante v\\xc3\\xa1rios dias. Pelo menos 63 milh\\xc3\\xb5es de brasileiros de todas as idades sofrem com dores de cabe\\xc3\\xa7a frequentes.</p>\\n                                </div>\\n                            </div>\\n                        </li>\\n                        <li class="timeline-inverted">\\n                            <div class="timeline-image">\\n                                <img class="img-circle img-responsive" src="\', escape=False)\n    response.write(URL(\'static\',\'images/dg.jpg\'))\n    response.write(\'" alt="">\\n                            </div>\\n                            <div class="timeline-panel">\\n                                <div class="timeline-heading">\\n                                    <h4>Dor, ard\\xc3\\xaancia na garganta e Ronqueira</h4>\\n                                </div>\\n                                <div class="timeline-body">\\n                                    <p class="text-muted">Dor de garganta \\xc3\\xa9 uma condi\\xc3\\xa7\\xc3\\xa3o de desconforto acompanhada de coceira e dor na garganta. A polui\\xc3\\xa7\\xc3\\xa3o do ar interior e exterior pode ser um fator causal dor de garganta. Moradores de \\xc3\\xa1reas industriais tendem a inalar ar contaminado com part\\xc3\\xadculas de poeira nocivas. Isso pode causar irrita\\xc3\\xa7\\xc3\\xa3o da garganta e sistema respirat\\xc3\\xb3rio.</p>\\n                                </div>\\n                            </div>\\n                        </li>\\n                        <li>\\n                            <div class="timeline-image">\\n                                <img class="img-circle img-responsive" src="\', escape=False)\n    response.write(URL(\'static\',\'images/ap.jpg\'))\n    response.write(\'" alt="">\\n                            </div>\\n                            <div class="timeline-panel">\\n                                <div class="timeline-heading">\\n                                    <h4>Ard\\xc3\\xaancia nos olhos, lacrimejamento, vermelhid\\xc3\\xa3o</h4>\\n                                </div>\\n                                <div class="timeline-body">\\n                                    <p class="text-muted">Um estudo divulgado em 2012 pela USP, em parceria com a Universidade Federal de S\\xc3\\xa3o Paulo (UNIFESP) e a universidade de Haward nos EUA, revelou como a polui\\xc3\\xa7\\xc3\\xa3o dos grandes centros urbanos prejudicam os trabalhadores que atuam rotineiramente no tr\\xc3\\xa2nsito. Assim, ap\\xc3\\xb3s quatro anos de pesquisa, os 70 motociclistas e os 30 funcion\\xc3\\xa1rios da Companhia de Engenharia de Tr\\xc3\\xa2nsito (CET) analisados, apresentaram algum tipo de inflama\\xc3\\xa7\\xc3\\xa3o e ard\\xc3\\xaancia nos olhos. A polui\\xc3\\xa7\\xc3\\xa3o atmosf\\xc3\\xa9rica pode acarretar outros problemas como S\\xc3\\xadndrome do Olho Seco, inflama\\xc3\\xa7\\xc3\\xa3o da C\\xc3\\xb3rnea e Conjuntivite T\\xc3\\xb3xica. </p>\\n                                </div>\\n                            </div>\\n                        </li>\\n                        <li class="timeline-inverted">\\n                            <div class="timeline-image">\\n                                <img class="img-circle img-responsive" src="\', escape=False)\n    response.write(URL(\'static\',\'images/to.jpg\'))\n    response.write(\'" alt="">\\n                            </div>\\n                            <div class="timeline-panel">\\n                                <div class="timeline-heading">\\n                                    <h4>Tosse</h4>\\n                                </div>\\n                                <div class="timeline-body">\\n                                    <p class="text-muted">A tosse \\xc3\\xa9 o primeiro sinal de que alguma coisa est\\xc3\\xa1 errada no nosso organismo. Ela tem o papel de, por exemplo, expulsar a poeira e a fuma\\xc3\\xa7a que est\\xc3\\xa3o irritando as vias a\\xc3\\xa9reas.</p>\\n                                </div>\\n                            </div>\\n                        </li>\\n                            <li>\\n                            <div class="timeline-image">\\n                                <img class="img-circle img-responsive" src="\', escape=False)\n    response.write(URL(\'static\',\'images/si.jpeg\'))\n    response.write(\'" alt="">\\n                            </div>\\n                            <div class="timeline-panel">\\n                                <div class="timeline-heading">\\n                                    <h4>Sibil\\xc3\\xa2ncia</h4>\\n                                </div>\\n                                <div class="timeline-body">\\n                                    <p class="text-muted">Existem poucas evid\\xc3\\xaancias sobre o papel da polui\\xc3\\xa7\\xc3\\xa3o do ar no desenvolvimento e desencadeamento de sibil\\xc3\\xa2ncia em crian\\xc3\\xa7as. Um estudo publicado em recente edi\\xc3\\xa7\\xc3\\xa3o do peri\\xc3\\xb3dico Thorax examinou o efeito da exposi\\xc3\\xa7\\xc3\\xa3o \\xc3\\xa0 polui\\xc3\\xa7\\xc3\\xa3o a\\xc3\\xa9rea sobre sintomas de sibil\\xc3\\xa2ncia em crian\\xc3\\xa7as menores de 3 anos de idade com susceptibilidade gen\\xc3\\xa9tica para asma. Segundo os resultados, foram observadas associa\\xc3\\xa7\\xc3\\xb5es positivas significativas entre concentra\\xc3\\xa7\\xc3\\xb5es de part\\xc3\\xadculas de di\\xc3\\xa2metro (PM10), di\\xc3\\xb3xido de nitrog\\xc3\\xaanio (NO2) e \\xc3\\xb3xido. </p>\\n                                </div>\\n                            </div>\\n                        </li>\\n                           <li class="timeline-inverted">\\n                            <div class="timeline-image">\\n                                <img class="img-circle img-responsive" src="\', escape=False)\n    response.write(URL(\'static\',\'images/fb.jpg\'))\n    response.write(\'" alt="">\\n                            </div>\\n                            <div class="timeline-panel">\\n                                <div class="timeline-heading">\\n                                    <h4>Febre</h4>\\n                                </div>\\n                                <div class="timeline-body">\\n                                    <p class="text-muted">Eleva\\xc3\\xa7\\xc3\\xa3o da temperatura do corpo humano para cima dos limites considerados normais (36 a 37,3 \\xc2\\xb0C), faixa (range) que compreende 95% da popula\\xc3\\xa7\\xc3\\xa3o sadia.</p>\\n                                </div>\\n                            </div>\\n                        </li>\\n                             <li>\\n                            <div class="timeline-image">\\n                                <img class="img-circle img-responsive" src="\', escape=False)\n    response.write(URL(\'static\',\'images/do.jpg\'))\n    response.write(\'" alt="">\\n                            </div>\\n                            <div class="timeline-panel">\\n                                <div class="timeline-heading">\\n                                    <h4>Dor de ouvido</h4>\\n                                </div>\\n                                <div class="timeline-body">\\n                                    <p class="text-muted">Dor de ouvido \\xc3\\xa9 mais comum em crian\\xc3\\xa7as do que em adultos. A dor de ouvido pode ser constante ou pode ir e vir. Ele pode surgir como uma sensa\\xc3\\xa7\\xc3\\xa3o de queima\\xc3\\xa7\\xc3\\xa3o, uma dor afiada ou ma\\xc3\\xa7ante.</p>\\n                                </div>\\n                            </div>\\n                        </li>\\n                        <li class="timeline-inverted">\\n                            <div class="timeline-image">\\n                                <h4>Fique\\n                                    \\n                                    <br>Alertamos!</h4>\\n                            </div>\\n                        </li>\\n                    </ul>\\n                </div>\\n            </div>\\n        </div>\\n    </section>\\n\\n    <!-- Team Section -->\\n    <section id="team" class="bg-light-gray">\\n        <div class="container">\\n            <div class="row">\\n                <div class="col-lg-12 text-center">\\n                    <h2 class="section-heading">Equipe</h2>\\n                    <h3 class="section-subheading text-muted">Reunir-se \\xc3\\xa9 um come\\xc3\\xa7o, permanecer juntos \\xc3\\xa9 um progresso, e trabalhar juntos \\xc3\\xa9 sucesso.</h3>\\n                </div>\\n            </div>\\n            <div class="row">\\n                <div class="col-sm-4">\\n                    <div class="team-member">\\n                        <img src="\', escape=False)\n    response.write(URL(\'static\',\'images/wellington.jpg\'))\n    response.write(\'" class="img-responsive img-circle" alt="" height="200" width="200">\\n                        <h4>Wellington Faria</h4>\\n                        <p class="text-muted">Estudante de Engenharia da Computa\\xc3\\xa7\\xc3\\xa3o  e Mestrando em Telecomunica\\xc3\\xa7\\xc3\\xb5es pelo Instituto Nacional de Telecomunica\\xc3\\xa7\\xc3\\xb5es; Professor Volunt\\xc3\\xa1rio de Algoritmo, C++ e Arduino no projeto Cas@viva e Cofundador da Startup SPIn - Solu\\xc3\\xa7\\xc3\\xb5es para o Agroneg\\xc3\\xb3cio. </p>\\n                        <ul class="list-inline social-buttons">\\n                            <li><a href="#"><i class="fa fa-twitter"></i></a>\\n                            </li>\\n                            <li><a href="https://www.facebook.com/wellingtoncf"><i class="fa fa-facebook"></i></a>\\n                            </li>\\n                            <li><a href="#"><i class="fa fa-linkedin"></i></a>\\n                            </li>\\n                        </ul>\\n                    </div>\\n                </div>\\n                <div class="col-sm-4">\\n                    <div class="team-member">\\n                        <img src="\', escape=False)\n    response.write(URL(\'static\',\'images/marcelo.jpg\'))\n    response.write(\'" class="img-responsive img-circle" alt="" height="200" width="200">\\n                        <h4>Marcelo Henrique</h4>\\n                        <p class="text-muted">Graduando de Engenharia da Computa\\xc3\\xa7\\xc3\\xa3o e aluno do mestrado em Telecomunica\\xc3\\xa7\\xc3\\xb5es pelo INATEL - Instituto Nacional de Telecomunica\\xc3\\xa7\\xc3\\xb5es.Estagi\\xc3\\xa1rio do CSC Camargo Corr\\xc3\\xaaa na \\xc3\\xa1rea de projeto e opera\\xc3\\xa7\\xc3\\xa3o de redes de telecomunica\\xc3\\xa7\\xc3\\xb5es.</p>\\n                        <ul class="list-inline social-buttons">\\n                            <li><a href="#"><i class="fa fa-twitter"></i></a>\\n                            </li>\\n                            <li><a href="#"><i class="fa fa-facebook"></i></a>\\n                            </li>\\n                            <li><a href="#"><i class="fa fa-linkedin"></i></a>\\n                            </li>\\n                        </ul>\\n                    </div>\\n                </div>\\n                <div class="col-sm-4">\\n                    <div class="team-member">\\n                        <img src="\', escape=False)\n    response.write(URL(\'static\',\'images/jessica.jpg\'))\n    response.write(\'"  class="img-responsive img-circle" alt="" height="200" width="200">\\n                        <h4>J\\xc3\\xa9ssica Amaral</h4>\\n                        <p class="text-muted">Estudante de Engenharia da Computa\\xc3\\xa7\\xc3\\xa3o pelo Instituto Nacional de Telecomunica\\xc3\\xa7\\xc3\\xb5es. Estagi\\xc3\\xa1ria no ICC - Treinamento, tutora do curso EaD de desenvolvimento Web front-end e participante do projeto OSS de redes de telecomunica\\xc3\\xa7\\xc3\\xb5es. Apaixonada por tecnologia e inova\\xc3\\xa7\\xc3\\xa3o e adora assistir filmes e s\\xc3\\xa9ries.</p>\\n                        <ul class="list-inline social-buttons">\\n                            <li><a href="#"><i class="fa fa-twitter"></i></a>\\n                            </li>\\n                            <li><a href="#"><i class="fa fa-facebook"></i></a>\\n                            </li>\\n                            <li><a href="#"><i class="fa fa-linkedin"></i></a>\\n                            </li>\\n                        </ul>\\n                    </div>\\n                </div>\\n                   <div class="col-sm-4">\\n                    <div class="team-member">\\n                        <img src="\', escape=False)\n    response.write(URL(\'static\',\'images/renzo.jpg\'))\n    response.write(\'"  class="img-responsive img-circle" alt="" height="200" width="200">\\n                        <h4>Renzo Mesquita</h4>\\n                        <p class="text-muted">Professor pelo Inatel</p>\\n                        <ul class="list-inline social-buttons">\\n                            <li><a href="#"><i class="fa fa-twitter"></i></a>\\n                            </li>\\n                            <li><a href="#"><i class="fa fa-facebook"></i></a>\\n                            </li>\\n                            <li><a href="#"><i class="fa fa-linkedin"></i></a>\\n                            </li>\\n                        </ul>\\n                    </div>\\n                </div>\\n\\n                  <div class="col-sm-4">\\n                    <div class="team-member">\\n                        <img src="\', escape=False)\n    response.write(URL(\'static\',\'images/felipe.jpg\'))\n    response.write(\'"  class="img-responsive img-circle" alt="" height="200" width="200">\\n                        <h4>Felipe Estevam</h4>\\n                        <p class="text-muted">Graduando de Engenharia da Computa\\xc3\\xa7\\xc3\\xa3o e Monitor no Instituto Nacional de Telecomunica\\xc3\\xa7\\xc3\\xb5es. Atua como Freelancer no desenvolvimento de  projetos de hardware e firmware para sistemas embarcados.</p>\\n                        <ul class="list-inline social-buttons">\\n                            <li><a href="#"><i class="fa fa-twitter"></i></a>\\n                            </li>\\n                            <li><a href="#"><i class="fa fa-facebook"></i></a>\\n                            </li>\\n                            <li><a href="#"><i class="fa fa-linkedin"></i></a>\\n                            </li>\\n                        </ul>\\n                    </div>\\n                </div>\\n\\n            </div>\\n            <div class="row">\\n                <div class="col-lg-8 col-lg-offset-2 text-center">\\n                    <p class="large text-muted">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aut eaque, laboriosam veritatis, quos non quis ad perspiciatis, totam corporis ea, alias ut unde.</p>\\n                </div>\\n            </div>\\n        </div>\\n    </section>\\n\\n    <!-- Clients Aside -->\\n    <aside class="clients">\\n        <div class="container">\\n            <div class="row">\\n                <div class="col-md-3 col-sm-6">\\n                    <a href="#">\\n                        <img src="http://www.inatel.br/home/images/stories/inatel/Logoinatel.gif" class="img-responsive img-centered" alt="">\\n                    </a>\\n                </div>\\n                \\n            </div>\\n        </div>\\n    </aside>\\n    \\n    <!-- Contact Section -->\\n    <section id="contact">\\n        <div class="container">\\n            <div class="row">\\n                <div class="col-lg-12 text-center">\\n                    <h2 class="section-heading">Contato</h2>\\n                    <h3 class="section-subheading text-muted">\\xc3\\x89 um prazer conhecer voc\\xc3\\xaa.</h3>\\n                </div>\\n            </div>\\n            <div class="row">\\n                <div class="col-lg-12">\\n                    <form name="sentMessage" id="contactForm" novalidate>\\n                        <div class="row">\\n                            <div class="col-md-6">\\n                                <div class="form-group">\\n                                    <input type="text" class="form-control" placeholder="Your Name *" id="name" required data-validation-required-message="Please enter your name.">\\n                                    <p class="help-block text-danger"></p>\\n                                </div>\\n                                <div class="form-group">\\n                                    <input type="email" class="form-control" placeholder="Your Email *" id="email" required data-validation-required-message="Please enter your email address.">\\n                                    <p class="help-block text-danger"></p>\\n                                </div>\\n                                <div class="form-group">\\n                                    <input type="tel" class="form-control" placeholder="Your Phone *" id="phone" required data-validation-required-message="Please enter your phone number.">\\n                                    <p class="help-block text-danger"></p>\\n                                </div>\\n                            </div>\\n                            <div class="col-md-6">\\n                                <div class="form-group">\\n                                    <textarea class="form-control" placeholder="Your Message *" id="message" required data-validation-required-message="Please enter a message."></textarea>\\n                                    <p class="help-block text-danger"></p>\\n                                </div>\\n                            </div>\\n                            <div class="clearfix"></div>\\n                            <div class="col-lg-12 text-center">\\n                                <div id="success"></div>\\n                                <button type="submit" class="btn btn-xl">Enviar Mensagem</button>\\n                            </div>\\n                        </div>\\n                    </form>\\n                </div>\\n            </div>\\n        </div>\\n    </section>\\n\\n    <footer>\\n        <div class="container">\\n            <div class="row">\\n                <div class="col-md-4">\\n                    <span class="copyright">Copyright &copy; Your Website 2014</span>\\n                </div>\\n                <div class="col-md-4">\\n                    <ul class="list-inline social-buttons">\\n                        <li><a href="#"><i class="fa fa-twitter"></i></a>\\n                        </li>\\n                        <li><a href="#"><i class="fa fa-facebook"></i></a>\\n                        </li>\\n                        <li><a href="#"><i class="fa fa-linkedin"></i></a>\\n                        </li>\\n                    </ul>\\n                </div>\\n                <div class="col-md-4">\\n                    <ul class="list-inline quicklinks">\\n                        <li><a href="#">Privacy Policy</a>\\n                        </li>\\n                        <li><a href="#">Terms of Use</a>\\n                        </li>\\n                    </ul>\\n                </div>\\n            </div>\\n        </div>\\n    </footer>\\n\\n    <!-- Portfolio Modals -->\\n    <!-- Use the modals below to showcase details about your portfolio projects! -->\\n\\n    <!-- Portfolio Modal 1 -->\\n    <div class="portfolio-modal modal fade" id="portfolioModal1" tabindex="-1" role="dialog" aria-hidden="true">\\n        <div class="modal-content">\\n            <div class="close-modal" data-dismiss="modal">\\n                <div class="lr">\\n                    <div class="rl">\\n                    </div>\\n                </div>\\n            </div>\\n            <div class="container">\\n                <div class="row">\\n                    <div class="col-lg-8 col-lg-offset-2">\\n                        <div class="modal-body">\\n                            <!-- Project Details Go Here -->\\n                            <h2>Project Name</h2>\\n                            <p class="item-intro text-muted">Lorem ipsum dolor sit amet consectetur.</p>\\n                            <img class="img-responsive img-centered" src="img/portfolio/roundicons-free.png" alt="">\\n                            <p>Use this area to describe your project. Lorem ipsum dolor sit amet, consectetur adipisicing elit. Est blanditiis dolorem culpa incidunt minus dignissimos deserunt repellat aperiam quasi sunt officia expedita beatae cupiditate, maiores repudiandae, nostrum, reiciendis facere nemo!</p>\\n                            <p>\\n                                <strong>Want these icons in this portfolio item sample?</strong>You can download 60 of them for free, courtesy of <a href="https://getdpd.com/cart/hoplink/18076?referrer=bvbo4kax5k8ogc">RoundIcons.com</a>, or you can purchase the 1500 icon set <a href="https://getdpd.com/cart/hoplink/18076?referrer=bvbo4kax5k8ogc">here</a>.</p>\\n                            <ul class="list-inline">\\n                                <li>Date: July 2014</li>\\n                                <li>Client: Round Icons</li>\\n                                <li>Category: Graphic Design</li>\\n                            </ul>\\n                            <button type="button" class="btn btn-primary" data-dismiss="modal"><i class="fa fa-times"></i> Close Project</button>\\n                        </div>\\n                    </div>\\n                </div>\\n            </div>\\n        </div>\\n    </div>\\n\\n    <!-- Portfolio Modal 2 -->\\n    <div class="portfolio-modal modal fade" id="portfolioModal2" tabindex="-1" role="dialog" aria-hidden="true">\\n        <div class="modal-content">\\n            <div class="close-modal" data-dismiss="modal">\\n                <div class="lr">\\n                    <div class="rl">\\n                    </div>\\n                </div>\\n            </div>\\n            <div class="container">\\n                <div class="row">\\n                    <div class="col-lg-8 col-lg-offset-2">\\n                        <div class="modal-body">\\n                            <h2>Project Heading</h2>\\n                            <p class="item-intro text-muted">Lorem ipsum dolor sit amet consectetur.</p>\\n                            <img class="img-responsive img-centered" src="img/portfolio/startup-framework-preview.png" alt="">\\n                            <p><a href="http://designmodo.com/startup/?u=787">Startup Framework</a> is a website builder for professionals. Startup Framework contains components and complex blocks (PSD+HTML Bootstrap themes and templates) which can easily be integrated into almost any design. All of these components are made in the same style, and can easily be integrated into projects, allowing you to create hundreds of solutions for your future projects.</p>\\n                            <p>You can preview Startup Framework <a href="http://designmodo.com/startup/?u=787">here</a>.</p>\\n                            <button type="button" class="btn btn-primary" data-dismiss="modal"><i class="fa fa-times"></i> Close Project</button>\\n                        </div>\\n                    </div>\\n                </div>\\n            </div>\\n        </div>\\n    </div>\\n\\n    <!-- Portfolio Modal 3 -->\\n    <div class="portfolio-modal modal fade" id="portfolioModal3" tabindex="-1" role="dialog" aria-hidden="true">\\n        <div class="modal-content">\\n            <div class="close-modal" data-dismiss="modal">\\n                <div class="lr">\\n                    <div class="rl">\\n                    </div>\\n                </div>\\n            </div>\\n            <div class="container">\\n                <div class="row">\\n                    <div class="col-lg-8 col-lg-offset-2">\\n                        <div class="modal-body">\\n                            <!-- Project Details Go Here -->\\n                            <h2>Project Name</h2>\\n                            <p class="item-intro text-muted">Lorem ipsum dolor sit amet consectetur.</p>\\n                            <img class="img-responsive img-centered" src="img/portfolio/treehouse-preview.png" alt="">\\n                            <p>Treehouse is a free PSD web template built by <a href="https://www.behance.net/MathavanJaya">Mathavan Jaya</a>. This is bright and spacious design perfect for people or startup companies looking to showcase their apps or other projects.</p>\\n                            <p>You can download the PSD template in this portfolio sample item at <a href="http://freebiesxpress.com/gallery/treehouse-free-psd-web-template/">FreebiesXpress.com</a>.</p>\\n                            <button type="button" class="btn btn-primary" data-dismiss="modal"><i class="fa fa-times"></i> Close Project</button>\\n                        </div>\\n                    </div>\\n                </div>\\n            </div>\\n        </div>\\n    </div>\\n\\n    <!-- Portfolio Modal 4 -->\\n    <div class="portfolio-modal modal fade" id="portfolioModal4" tabindex="-1" role="dialog" aria-hidden="true">\\n        <div class="modal-content">\\n            <div class="close-modal" data-dismiss="modal">\\n                <div class="lr">\\n                    <div class="rl">\\n                    </div>\\n                </div>\\n            </div>\\n            <div class="container">\\n                <div class="row">\\n                    <div class="col-lg-8 col-lg-offset-2">\\n                        <div class="modal-body">\\n                            <!-- Project Details Go Here -->\\n                            <h2>Project Name</h2>\\n                            <p class="item-intro text-muted">Lorem ipsum dolor sit amet consectetur.</p>\\n                            <img class="img-responsive img-centered" src="img/portfolio/golden-preview.png" alt="">\\n                            <p>Start Bootstrap\\\'s Agency theme is based on Golden, a free PSD website template built by <a href="https://www.behance.net/MathavanJaya">Mathavan Jaya</a>. Golden is a modern and clean one page web template that was made exclusively for Best PSD Freebies. This template has a great portfolio, timeline, and meet your team sections that can be easily modified to fit your needs.</p>\\n                            <p>You can download the PSD template in this portfolio sample item at <a href="http://freebiesxpress.com/gallery/golden-free-one-page-web-template/">FreebiesXpress.com</a>.</p>\\n                            <button type="button" class="btn btn-primary" data-dismiss="modal"><i class="fa fa-times"></i> Close Project</button>\\n                        </div>\\n                    </div>\\n                </div>\\n            </div>\\n        </div>\\n    </div>\\n\\n    <!-- Portfolio Modal 5 -->\\n    <div class="portfolio-modal modal fade" id="portfolioModal5" tabindex="-1" role="dialog" aria-hidden="true">\\n        <div class="modal-content">\\n            <div class="close-modal" data-dismiss="modal">\\n                <div class="lr">\\n                    <div class="rl">\\n                    </div>\\n                </div>\\n            </div>\\n            <div class="container">\\n                <div class="row">\\n                    <div class="col-lg-8 col-lg-offset-2">\\n                        <div class="modal-body">\\n                            <!-- Project Details Go Here -->\\n                            <h2>Project Name</h2>\\n                            <p class="item-intro text-muted">Lorem ipsum dolor sit amet consectetur.</p>\\n                            <img class="img-responsive img-centered" src="img/portfolio/escape-preview.png" alt="">\\n                            <p>Escape is a free PSD web template built by <a href="https://www.behance.net/MathavanJaya">Mathavan Jaya</a>. Escape is a one page web template that was designed with agencies in mind. This template is ideal for those looking for a simple one page solution to describe your business and offer your services.</p>\\n                            <p>You can download the PSD template in this portfolio sample item at <a href="http://freebiesxpress.com/gallery/escape-one-page-psd-web-template/">FreebiesXpress.com</a>.</p>\\n                            <button type="button" class="btn btn-primary" data-dismiss="modal"><i class="fa fa-times"></i> Close Project</button>\\n                        </div>\\n                    </div>\\n                </div>\\n            </div>\\n        </div>\\n    </div>\\n\\n    <!-- Portfolio Modal 6 -->\\n    <div class="portfolio-modal modal fade" id="portfolioModal6" tabindex="-1" role="dialog" aria-hidden="true">\\n        <div class="modal-content">\\n            <div class="close-modal" data-dismiss="modal">\\n                <div class="lr">\\n                    <div class="rl">\\n                    </div>\\n                </div>\\n            </div>\\n            <div class="container">\\n                <div class="row">\\n                    <div class="col-lg-8 col-lg-offset-2">\\n                        <div class="modal-body">\\n                            <!-- Project Details Go Here -->\\n                            <h2>Project Name</h2>\\n                            <p class="item-intro text-muted">Lorem ipsum dolor sit amet consectetur.</p>\\n                            <img class="img-responsive img-centered" src="img/portfolio/dreams-preview.png" alt="">\\n                            <p>Dreams is a free PSD web template built by <a href="https://www.behance.net/MathavanJaya">Mathavan Jaya</a>. Dreams is a modern one page web template designed for almost any purpose. It\\xe2\\x80\\x99s a beautiful template that\\xe2\\x80\\x99s designed with the Bootstrap framework in mind.</p>\\n                            <p>You can download the PSD template in this portfolio sample item at <a href="http://freebiesxpress.com/gallery/dreams-free-one-page-web-template/">FreebiesXpress.com</a>.</p>\\n                            <button type="button" class="btn btn-primary" data-dismiss="modal"><i class="fa fa-times"></i> Close Project</button>\\n                        </div>\\n                    </div>\\n                </div>\\n            </div>\\n        </div>\\n    </div>\\n\\n    <!-- jQuery -->\\n    <script src="\', escape=False)\n    response.write(URL(\'static\',\'js/jquery.js\'))\n    response.write(\'"></script>\\n\\n    <!-- Bootstrap Core JavaScript -->\\n    <script src="\', escape=False)\n    response.write(URL(\'static\',\'js/bootstrap.min.js\'))\n    response.write(\'"></script>\\n\\n    <!-- Plugin JavaScript -->\\n    <script src="http://cdnjs.cloudflare.com/ajax/libs/jquery-easing/1.3/jquery.easing.min.js\\\')}}"></script>\\n    <script src="\', escape=False)\n    response.write(URL(\'static\',\'js/classie.js\'))\n    response.write(\'"></script>\\n    <script src="\', escape=False)\n    response.write(URL(\'static\',\'js/cbpAnimatedHeader.js\'))\n    response.write(\'"></script>\\n\\n    <!-- Contact Form JavaScript -->\\n    <script src="\', escape=False)\n    response.write(URL(\'static\',\'js/jqBootstrapValidation.js\'))\n    response.write(\'"></script>\\n    <script src="\', escape=False)\n    response.write(URL(\'static\',\'js/contact_me.js\'))\n    response.write(\'"></script>\\n\\n    <!-- Custom Theme JavaScript -->\\n    <script src="\', escape=False)\n    response.write(URL(\'static\',\'\tjs/agency.js\'))\n    response.write(\'"></script>\\n\\n</body>\\n\\n</html>\\n\', escape=False)'
+p7
+sS'snapshot'
+p8
+(dp9
+S'exception'
+p10
+(dp11
+S'__module__'
+p12
+S"'gluon.rocket'"
+p13
+sS'__getslice__'
+p14
+S"<method-wrapper '__getslice__' of SocketTimeout object>"
+p15
+sS'__str__'
+p16
+S"<method-wrapper '__str__' of SocketTimeout object>"
+p17
+sS'__reduce__'
+p18
+S'<built-in method __reduce__ of SocketTimeout object>'
+p19
+sS'__dict__'
+p20
+S'{}'
+p21
+sS'__sizeof__'
+p22
+S'<built-in method __sizeof__ of SocketTimeout object>'
+p23
+sS'__weakref__'
+p24
+S'None'
+p25
+sS'__init__'
+p26
+S"<method-wrapper '__init__' of SocketTimeout object>"
+p27
+sS'__setattr__'
+p28
+S"<method-wrapper '__setattr__' of SocketTimeout object>"
+p29
+sS'__reduce_ex__'
+p30
+S'<built-in method __reduce_ex__ of SocketTimeout object>'
+p31
+sS'__new__'
+p32
+S'<built-in method __new__ of type object>'
+p33
+sS'__format__'
+p34
+S'<built-in method __format__ of SocketTimeout object>'
+p35
+sS'__class__'
+p36
+S"<class 'gluon.rocket.SocketTimeout'>"
+p37
+sS'__doc__'
+p38
+S"'Exception for when a socket times out between requests.'"
+p39
+sS'__getitem__'
+p40
+S"<method-wrapper '__getitem__' of SocketTimeout object>"
+p41
+sS'__setstate__'
+p42
+S'<built-in method __setstate__ of SocketTimeout object>'
+p43
+sS'__getattribute__'
+p44
+S"<method-wrapper '__getattribute__' of SocketTimeout object>"
+p45
+sS'args'
+p46
+S"('Socket timed out before request.',)"
+p47
+sS'__subclasshook__'
+p48
+S'<built-in method __subclasshook__ of type object>'
+p49
+sS'__unicode__'
+p50
+S'<built-in method __unicode__ of SocketTimeout object>'
+p51
+sS'__delattr__'
+p52
+S"<method-wrapper '__delattr__' of SocketTimeout object>"
+p53
+sS'__repr__'
+p54
+S"<method-wrapper '__repr__' of SocketTimeout object>"
+p55
+sS'__hash__'
+p56
+S"<method-wrapper '__hash__' of SocketTimeout object>"
+p57
+ssS'evalue'
+p58
+S'Socket timed out before request.'
+p59
+sS'frames'
+p60
+(lp61
+(dp62
+S'file'
+p63
+S'/home/wellington/SPIn/web2py/gluon/rocket.py'
+p64
+sS'dump'
+p65
+(dp66
+S'self'
+p67
+S'<WSGIWorker(Thread-5, started daemon -1292907712)>'
+p68
+sS'conn'
+p69
+S'<gluon.rocket.Connection object>'
+p70
+sS'self.run_app'
+p71
+S'<bound method WSGIWorker.run_app of <WSGIWorker(Thread-5, started daemon -1292907712)>>'
+p72
+ssS'lnum'
+p73
+I1337
+sS'lines'
+p74
+(dp75
+I1332
+S'            # Enter connection serve loop'
+p76
+sI1333
+S'            while True:'
+p77
+sI1334
+S'                if __debug__:'
+p78
+sI1335
+S"                    self.err_log.debug('Serving a request')"
+p79
+sI1336
+S'                try:'
+p80
+sI1337
+S'                    self.run_app(conn)'
+p81
+sI1338
+S'                except:'
+p82
+sI1339
+S'                    exc = sys.exc_info()'
+p83
+sI1340
+S'                    handled = self._handleError(*exc)'
+p84
+sI1341
+S'                    if handled:'
+p85
+ssS'call'
+p86
+S'(self=<WSGIWorker(Thread-5, started daemon -1292907712)>)'
+p87
+sS'func'
+p88
+S'run'
+p89
+sa(dp90
+g63
+S'/home/wellington/SPIn/web2py/gluon/rocket.py'
+p91
+sg65
+(dp92
+S'self'
+p93
+S'<WSGIWorker(Thread-5, started daemon -1292907712)>'
+p94
+sS'self.environ'
+p95
+S"{'HTTP_ACCEPT': 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8', 'HTTP_ACCEPT_ENCODING': 'gzip, deflate, sdch', 'HTTP_ACCEPT_LANGUAGE': 'pt-BR,pt;q=0.8,en-US;q=0.6,en;q=0.4,es-419;q=0.2,es;q=0.2', 'HTTP_CACHE_CONTROL': 'max-age=0', 'HTTP_CONNECTION': 'keep-alive', 'HTTP_COOKIE': 'session_id_pigpin=127.0.0.1-c9dd88b2-922b-4fce-8...in=127.0.0.1-e46bab6f-4b6f-4130-a86e-52c736388288', 'HTTP_HOST': '127.0.0.1:8000', 'HTTP_REFERER': 'http://127.0.0.1:8000/monitorart/default/user/login', 'HTTP_USER_AGENT': 'Mozilla/5.0 (X11; Linux i686) AppleWebKit/537.36...ML, like Gecko) Chrome/43.0.2357.81 Safari/537.36', 'PATH_INFO': '/monitorart/default/index', ...}"
+p96
+sS'sock_file'
+p97
+S'<socket._fileobject object>'
+p98
+sS'environ'
+p99
+S'undefined'
+p100
+sS'self.build_environ'
+p101
+S'<bound method WSGIWorker.build_environ of <WSGIWorker(Thread-5, started daemon -1292907712)>>'
+p102
+sS'conn'
+p103
+S'<gluon.rocket.Connection object>'
+p104
+ssg73
+I1830
+sg74
+(dp105
+I1825
+S'        else:'
+p106
+sI1826
+S'            sock_file = conn.makefile(BUF_SIZE)'
+p107
+sI1827
+S''
+sI1828
+S'        try:'
+p108
+sI1829
+S'            # Read the headers and build our WSGI environment'
+p109
+sI1830
+S'            self.environ = environ = self.build_environ(sock_file, conn)'
+p110
+sI1831
+S''
+sI1832
+S'            # Handle 100 Continue'
+p111
+sI1833
+S"            if environ.get('HTTP_EXPECT', '') == '100-continue':"
+p112
+sI1834
+S"                res = environ['SERVER_PROTOCOL'] + ' 100 Continue\\r\\n\\r\\n'"
+p113
+ssg86
+S'(self=<WSGIWorker(Thread-5, started daemon -1292907712)>, conn=<gluon.rocket.Connection object>)'
+p114
+sg88
+S'run_app'
+p115
+sa(dp116
+g63
+S'/home/wellington/SPIn/web2py/gluon/rocket.py'
+p117
+sg65
+(dp118
+S'sock_file'
+p119
+S'<socket._fileobject object>'
+p120
+sS'self.read_request_line'
+p121
+S'<bound method WSGIWorker.read_request_line of <WSGIWorker(Thread-5, started daemon -1292907712)>>'
+p122
+sS'self'
+p123
+S'<WSGIWorker(Thread-5, started daemon -1292907712)>'
+p124
+sS'request'
+p125
+g100
+ssg73
+I1650
+sg74
+(dp126
+I1645
+S'                                      "wsgiorg.futures": executor.futures})'
+p127
+sI1646
+S''
+sI1647
+S'    def build_environ(self, sock_file, conn):'
+p128
+sI1648
+S'        """ Build the execution environment. """'
+p129
+sI1649
+S'        # Grab the request line'
+p130
+sI1650
+S'        request = self.read_request_line(sock_file)'
+p131
+sI1651
+S''
+sI1652
+S'        # Copy the Base Environment'
+p132
+sI1653
+S'        environ = self.base_environ.copy()'
+p133
+sI1654
+S''
+ssg86
+S'(self=<WSGIWorker(Thread-5, started daemon -1292907712)>, sock_file=<socket._fileobject object>, conn=<gluon.rocket.Connection object>)'
+p134
+sg88
+S'build_environ'
+p135
+sa(dp136
+g63
+S'/home/wellington/SPIn/web2py/gluon/rocket.py'
+p137
+sg65
+(dp138
+S'global SocketTimeout'
+p139
+S"<class 'gluon.rocket.SocketTimeout'>"
+p140
+ssg73
+I1401
+sg74
+(dp141
+I1396
+S''
+sI1397
+S'                d = sock_file.readline()'
+p142
+sI1398
+S'                if PY3K:'
+p143
+sI1399
+S"                    d = d.decode('ISO-8859-1')"
+p144
+sI1400
+S'        except socket.timeout:'
+p145
+sI1401
+S"            raise SocketTimeout('Socket timed out before request.')"
+p146
+sI1402
+S'        except TypeError:'
+p147
+sI1403
+S'            raise SocketClosed('
+p148
+sI1404
+S"                'SSL bug caused closure of socket.  See '"
+p149
+sI1405
+S'                \'"https://groups.google.com/d/topic/web2py/P_Gw0JxWzCs".\')'
+p150
+ssg86
+S'(self=<WSGIWorker(Thread-5, started daemon -1292907712)>, sock_file=<socket._fileobject object>)'
+p151
+sg88
+S'read_request_line'
+p152
+sasS'pyver'
+p153
+S'Python 2.7.9: /usr/bin/python (prefix: /usr)'
+p154
+sS'etype'
+p155
+S"<class 'gluon.rocket.SocketTimeout'>"
+p156
+sS'date'
+p157
+S'Mon Sep 28 13:44:20 2015'
+p158
+sS'locals'
+p159
+(dp160
+S'sock_file'
+p161
+S'<socket._fileobject object>'
+p162
+sS'self'
+p163
+S'<WSGIWorker(Thread-5, started daemon -1292907712)>'
+p164
+sssS'traceback'
+p165
+S'Traceback (most recent call last):\n  File "/home/wellington/SPIn/web2py/gluon/rocket.py", line 1337, in run\n    self.run_app(conn)\n  File "/home/wellington/SPIn/web2py/gluon/rocket.py", line 1830, in run_app\n    self.environ = environ = self.build_environ(sock_file, conn)\n  File "/home/wellington/SPIn/web2py/gluon/rocket.py", line 1650, in build_environ\n    request = self.read_request_line(sock_file)\n  File "/home/wellington/SPIn/web2py/gluon/rocket.py", line 1401, in read_request_line\n    raise SocketTimeout(\'Socket timed out before request.\')\nSocketTimeout: Socket timed out before request.\n'
+p166
+s.

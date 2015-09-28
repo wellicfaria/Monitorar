@@ -16,6 +16,10 @@ def index():
     if you need a simple wiki simply replace the two lines below with:
     return auth.wiki()
     """
+    if auth.user:
+        print("tem usuario")
+
+
     response.flash = T("Hello World")
     return dict(message=T('Welcome to web2py!'))
 
@@ -36,8 +40,8 @@ def user():
     to decorate functions that need access control
     """
     form=auth()
-    form.custom.widget.email.update(_placeholder="E-mail...")
-    form.custom.widget.password.update(_placeholder="Senha...")
+    #form.custom.widget.email.update(_placeholder="E-mail...")
+    #form.custom.widget.password.update(_placeholder="Senha...")
     print(form.vars)
     return {'form':form}
 
