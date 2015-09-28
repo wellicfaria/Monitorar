@@ -25,7 +25,9 @@ def index():
 
 @auth.requires_login()
 def portal():
-    return {}
+    nome=db(db.auth_user.id==auth.user).select().last()
+    print(nome.first_name)
+    return {'nome':nome.first_name}
 
 
 def user():
