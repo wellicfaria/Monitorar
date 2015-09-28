@@ -17,11 +17,15 @@ def index():
     return auth.wiki()
     """
     if auth.user:
-        print("tem usuario")
+        redirect(URL(c='default', f='portal'))
 
 
     response.flash = T("Hello World")
     return dict(message=T('Welcome to web2py!'))
+
+@auth.requires_login()
+def portal():
+    return {}
 
 
 def user():
