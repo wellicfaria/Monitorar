@@ -123,7 +123,9 @@ img { max-width: 100%; }
 }
 
 .form-top-left h3 { margin-top: 0; color: #fff; }
+.form-top-left h2 { margin-top: 0; color: white; }
 .form-top-left p { opacity: 0.8; color: #fff; }
+
 
 .form-top-right {
 	float: left;
@@ -146,6 +148,7 @@ img { max-width: 100%; }
 
 .form-bottom form textarea {
 	height: 100px;
+	color: white;
 }
 
 .form-bottom form button.btn {
