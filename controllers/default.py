@@ -47,11 +47,9 @@ def portal():
 
     nome=db(db.auth_user.id==auth.user).select().last()
 
-<<<<<<< HEAD
-    return {'nome':nome.first_name}
-=======
+
     return {'nome':nome.first_name,'form':form,'leituras':leituras}
->>>>>>> origin/master
+
 
 
 def user():
