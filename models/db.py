@@ -59,6 +59,11 @@ auth = Auth(db)
 service = Service()
 plugins = PluginManager()
 
+#Campos extras do usuário
+auth.settings.extra_fields['auth_user']= [
+  Field('cidade', 'reference cidades')
+  ]
+
 #Tabela para armazenar as estados que possem o harware instalado
 db.define_table('estados',
     Field('nome_estado', type='string'),

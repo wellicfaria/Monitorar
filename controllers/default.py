@@ -8,6 +8,9 @@
 ## - download is for downloading files uploaded in the db (does streaming)
 #########################################################################
 
+#Importação de Bibliotecas
+from datetime import date #Manipulação de datas
+
 def index():
     """
     example action using the internationalization operator T and flash
@@ -25,9 +28,30 @@ def index():
 
 @auth.requires_login()
 def portal():
+    #formulário para setar o filto para aprententar os dados
+    atual = date.today()
+    final = date.fromordinal(atual.toordinal()-7) 
+    leituras=db((db.leituras.data_leitura<=atual) & (db.leituras.data_leitura>=final)).select()
+    form = SQLFORM.factory(
+        Field('date_atual', default=atual ,requires=[IS_NOT_EMPTY(),IS_DATE()]),
+        Field('date_final', default=final ,requires=[IS_NOT_EMPTY(),IS_DATE()])
+        )
+
+    if form.process().accepted:
+        response.flash = 'form accepted'
+        leituras=db((db.leituras.data_leitura<=form.vars.date_atual) & (db.leituras.data_leitura>=form.vars.date_final)).select()
+    elif form.errors:
+        response.flash = 'form has errors'
+
+
+
     nome=db(db.auth_user.id==auth.user).select().last()
 
+<<<<<<< HEAD
     return {'nome':nome.first_name}
+=======
+    return {'nome':nome.first_name,'form':form,'leituras':leituras}
+>>>>>>> origin/master
 
 
 def user():
@@ -48,7 +72,7 @@ def user():
     form=auth()
     #form.custom.widget.email.update(_placeholder="E-mail...")
     #form.custom.widget.password.update(_placeholder="Senha...")
-    print(form.vars)
+   
     return {'form':form}
 
 

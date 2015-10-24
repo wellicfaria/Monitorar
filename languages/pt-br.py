@@ -66,6 +66,7 @@
 'Edit This App': 'Editar esta aplicação',
 'Email and SMS': 'Email e SMS',
 'Enter a number between %(min)g and %(max)g': 'Enter a number between %(min)g and %(max)g',
+'Enter a value': 'Enter a value',
 'Enter an integer between %(min)g and %(max)g': 'Informe um valor inteiro entre %(min)g e %(max)g',
 'Enviando...': 'Enviando...',
 'Errors': 'Erros',
@@ -130,6 +131,7 @@
 'Other Recipes': 'Outras Receitas',
 'Overview': 'Visão Geral',
 'Password': 'Senha',
+"Password fields don't match": "Password fields don't match",
 'Plugins': 'Plugins',
 'Powered by': 'Desenvolvido com',
 'Preface': 'Prefácio',
@@ -187,7 +189,11 @@
 'Use (...)&(...) for AND, (...)|(...) for OR, and ~(...)  for NOT to build more complex queries.': 'Use (...)&(...) para AND, (...)|(...) para OR, e ~(...)  para NOT para construir consultas mais complexas.',
 'User ID': 'ID do Usuário',
 'User Voice': 'Opinião dos usuários',
+<<<<<<< HEAD
 'Verify Password': 'Verificar senha',
+=======
+'Value not in database': 'Value not in database',
+>>>>>>> origin/master
 'Videos': 'Vídeos',
 'View': 'Visualização',
 'Web2py': 'Web2py',

@@ -93,6 +93,16 @@
         <div id="page-wrapper">
             <div class="row">
                 <div class="col-lg-12">
+                
+                {{=form.custom.begin}}
+                <div class="row">
+                    <div class="col-md-4">Inicio: <div>{{=form.custom.widget.date_atual}}</div></div>
+                    <div class="col-md-4">Fim: <div>{{=form.custom.widget.date_final}}</div></div>
+                    <div class="col-md-4"> <br><div>{{=form.custom.submit}}</div> </div>
+                </div>
+                {{=form.custom.end}}
+    
+               
                     <h1 class="page-header">Gases</h1>
                 </div>
                 <!-- /.col-lg-12 -->
@@ -178,39 +188,13 @@
                                                 </tr>
                                             </thead>
                                             <tbody>
-                                                <tr>
-                                                    <td>10/21/2013</td>
-                                                    <td>3326</td>
-                                                </tr>
-                                                <tr>
-                                                    <td>10/21/2013</td>
-                                                    <td>3325</td>
-                                                </tr>
-                                                <tr>
-                                                    <td>10/21/2013</td>
-                                                    <td>3324</td>
-                                                    
-                                                </tr>
-                                                <tr>
-                                                    <td>10/21/2013</td>
-                                                     <td>3323</td>
-                                                </tr>
-                                                <tr>
-                                                    <td>10/21/2013</td>
-                                                    <td>3322</td>
-                                                </tr>
-                                                <tr>
-                                                    <td>10/21/2013</td>
-                                                    <td>3321</td>
-                                                </tr>
-                                                <tr>
-                                                    <td>10/21/2013</td>
-                                                    <td>3320</td>
-                                                </tr>
-                                                <tr>
-                                                    <td>10/21/2013</td>
-                                                    <td>3319</td>
-                                                </tr>
+                                                
+                                                {{for leitura in leituras:}}
+                                                    <tr>
+                                                        <td>{{=leitura.data_leitura}}</td>
+                                                        <td>{{=leitura.valor}}</td>
+                                                    </tr>
+                                                {{pass}}
                                             </tbody>
                                         </table>
                                     </div>
