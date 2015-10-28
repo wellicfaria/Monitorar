@@ -1,18 +1,18 @@
-timestamp: 2015-10-14T20:56:26.542530
+timestamp: 2015-10-24T15:13:14.923000
 CREATE TABLE estados(
     id INTEGER PRIMARY KEY AUTOINCREMENT,
     nome_estado CHAR(512),
     abreviacao CHAR(512)
 );
 success!
-timestamp: 2015-10-14T20:56:26.685037
+timestamp: 2015-10-24T15:13:15.113000
 CREATE TABLE cidades(
     id INTEGER PRIMARY KEY AUTOINCREMENT,
     nome_cidade CHAR(512),
-    estado INTEGER REFERENCES estados (id) ON DELETE CASCADE
+    estado INTEGER REFERENCES estados (id) ON DELETE CASCADE  
 );
 success!
-timestamp: 2015-10-14T20:56:26.818743
+timestamp: 2015-10-24T15:13:15.201000
 CREATE TABLE auth_user(
     id INTEGER PRIMARY KEY AUTOINCREMENT,
     first_name CHAR(128),
@@ -21,80 +21,78 @@ CREATE TABLE auth_user(
     password CHAR(512),
     registration_key CHAR(512),
     reset_password_key CHAR(512),
-    registration_id CHAR(512)
+    registration_id CHAR(512),
+    cidade INTEGER REFERENCES cidades (id) ON DELETE CASCADE  
 );
 success!
-timestamp: 2015-10-14T20:56:26.962033
+timestamp: 2015-10-24T15:13:15.369000
 CREATE TABLE auth_group(
     id INTEGER PRIMARY KEY AUTOINCREMENT,
     role CHAR(512),
     description TEXT
 );
 success!
-timestamp: 2015-10-14T20:56:27.140520
+timestamp: 2015-10-24T15:13:15.587000
 CREATE TABLE auth_membership(
     id INTEGER PRIMARY KEY AUTOINCREMENT,
-    user_id INTEGER REFERENCES auth_user (id) ON DELETE CASCADE,
-    group_id INTEGER REFERENCES auth_group (id) ON DELETE CASCADE
+    user_id INTEGER REFERENCES auth_user (id) ON DELETE CASCADE  ,
+    group_id INTEGER REFERENCES auth_group (id) ON DELETE CASCADE  
 );
 success!
-timestamp: 2015-10-14T20:56:27.339718
+timestamp: 2015-10-24T15:13:15.711000
 CREATE TABLE auth_permission(
     id INTEGER PRIMARY KEY AUTOINCREMENT,
-    group_id INTEGER REFERENCES auth_group (id) ON DELETE CASCADE,
+    group_id INTEGER REFERENCES auth_group (id) ON DELETE CASCADE  ,
     name CHAR(512),
     table_name CHAR(512),
     record_id INTEGER
 );
 success!
-timestamp: 2015-10-14T20:56:27.505876
+timestamp: 2015-10-24T15:13:15.822000
 CREATE TABLE auth_event(
     id INTEGER PRIMARY KEY AUTOINCREMENT,
     time_stamp TIMESTAMP,
     client_ip CHAR(512),
-    user_id INTEGER REFERENCES auth_user (id) ON DELETE CASCADE,
+    user_id INTEGER REFERENCES auth_user (id) ON DELETE CASCADE  ,
     origin CHAR(512),
     description TEXT
 );
 success!
-timestamp: 2015-10-14T20:56:27.693886
+timestamp: 2015-10-24T15:13:15.990000
 CREATE TABLE auth_cas(
     id INTEGER PRIMARY KEY AUTOINCREMENT,
-    user_id INTEGER REFERENCES auth_user (id) ON DELETE CASCADE,
+    user_id INTEGER REFERENCES auth_user (id) ON DELETE CASCADE  ,
     created_on TIMESTAMP,
     service CHAR(512),
     ticket CHAR(512),
     renew CHAR(1)
 );
 success!
-timestamp: 2015-10-14T20:56:27.871996
+timestamp: 2015-10-24T15:13:16.141000
 CREATE TABLE sensor(
     id INTEGER PRIMARY KEY AUTOINCREMENT,
     tipo_sensor CHAR(512),
-    unidade INTEGER REFERENCES estados (id) ON DELETE CASCADE
+    unidade INTEGER REFERENCES estados (id) ON DELETE CASCADE  
 );
 success!
-timestamp: 2015-10-14T20:56:28.059204
+timestamp: 2015-10-24T15:13:16.322000
 CREATE TABLE hardwares(
     id INTEGER PRIMARY KEY AUTOINCREMENT,
     descricao CHAR(512),
-    cidade INTEGER REFERENCES cidades (id) ON DELETE CASCADE,
+    cidade INTEGER REFERENCES cidades (id) ON DELETE CASCADE  ,
     latitude CHAR(512),
     longitude CHAR(512),
     sensores TEXT,
     senha CHAR(512)
 );
 success!
-timestamp: 2015-10-14T20:56:28.225339
+timestamp: 2015-10-24T15:13:16.538000
 CREATE TABLE leituras(
     id INTEGER PRIMARY KEY AUTOINCREMENT,
-    hardware INTEGER REFERENCES hardwares (id) ON DELETE CASCADE,
-    sensor INTEGER REFERENCES sensor (id) ON DELETE CASCADE,
+    hardware INTEGER REFERENCES hardwares (id) ON DELETE CASCADE  ,
+    sensor INTEGER REFERENCES sensor (id) ON DELETE CASCADE  ,
     valor DOUBLE,
     data_leitura DATE,
     hora_leitura TIME
 );
-success!
-timestamp: 2015-10-14T21:00:00.204700
-ALTER TABLE auth_user ADD cidade INTEGER REFERENCES cidades (id) ON DELETE CASCADE;
 success!
