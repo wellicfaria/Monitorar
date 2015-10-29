@@ -116,7 +116,7 @@ auth.settings.reset_password_requires_verification = True
 
 db.define_table('sensor',
     Field('tipo_sensor', type='string'),
-    Field('unidade', 'reference estados'),
+    Field('unidade', type='string'),
     format='%(tipo_sensor)s'
     )
 
@@ -138,3 +138,14 @@ db.define_table('leituras',
     Field('hora_leitura', 'time'),
     format='%(sensor)s'
     )
+
+db.define_table('autoridades',
+     Field('nome', type='string'),
+     Field('email', type='string'),
+     Field('telefone', type='string'),
+     Field('cidade', 'reference cidades'),
+     Field('tipo',type='string'),
+     format='%(nome)s'
+    )
+
+db.autoridades.nome.requires = IS_IN_SET(['Municipal', 'Estadual', 'Federal','Internacional'],error_message='Escolha uma autoridade!')
