@@ -1,18 +1,18 @@
-timestamp: 2015-10-31T14:57:01.996000
+timestamp: 2015-10-31T15:54:28.707000
 CREATE TABLE estados(
     id INTEGER PRIMARY KEY AUTOINCREMENT,
     nome_estado CHAR(512),
     abreviacao CHAR(512)
 );
 success!
-timestamp: 2015-10-31T14:57:02.222000
+timestamp: 2015-10-31T15:54:28.849000
 CREATE TABLE cidades(
     id INTEGER PRIMARY KEY AUTOINCREMENT,
     nome_cidade CHAR(512),
     estado INTEGER REFERENCES estados (id) ON DELETE CASCADE  
 );
 success!
-timestamp: 2015-10-31T14:57:02.309000
+timestamp: 2015-10-31T15:54:28.922000
 CREATE TABLE auth_user(
     id INTEGER PRIMARY KEY AUTOINCREMENT,
     first_name CHAR(128),
@@ -25,21 +25,21 @@ CREATE TABLE auth_user(
     cidade INTEGER REFERENCES cidades (id) ON DELETE CASCADE  
 );
 success!
-timestamp: 2015-10-31T14:57:02.427000
+timestamp: 2015-10-31T15:54:29.064000
 CREATE TABLE auth_group(
     id INTEGER PRIMARY KEY AUTOINCREMENT,
     role CHAR(512),
     description TEXT
 );
 success!
-timestamp: 2015-10-31T14:57:02.525000
+timestamp: 2015-10-31T15:54:29.161000
 CREATE TABLE auth_membership(
     id INTEGER PRIMARY KEY AUTOINCREMENT,
     user_id INTEGER REFERENCES auth_user (id) ON DELETE CASCADE  ,
     group_id INTEGER REFERENCES auth_group (id) ON DELETE CASCADE  
 );
 success!
-timestamp: 2015-10-31T14:57:02.642000
+timestamp: 2015-10-31T15:54:29.282000
 CREATE TABLE auth_permission(
     id INTEGER PRIMARY KEY AUTOINCREMENT,
     group_id INTEGER REFERENCES auth_group (id) ON DELETE CASCADE  ,
@@ -48,7 +48,7 @@ CREATE TABLE auth_permission(
     record_id INTEGER
 );
 success!
-timestamp: 2015-10-31T14:57:02.739000
+timestamp: 2015-10-31T15:54:29.418000
 CREATE TABLE auth_event(
     id INTEGER PRIMARY KEY AUTOINCREMENT,
     time_stamp TIMESTAMP,
@@ -58,7 +58,7 @@ CREATE TABLE auth_event(
     description TEXT
 );
 success!
-timestamp: 2015-10-31T14:57:02.831000
+timestamp: 2015-10-31T15:54:29.553000
 CREATE TABLE auth_cas(
     id INTEGER PRIMARY KEY AUTOINCREMENT,
     user_id INTEGER REFERENCES auth_user (id) ON DELETE CASCADE  ,
@@ -68,14 +68,14 @@ CREATE TABLE auth_cas(
     renew CHAR(1)
 );
 success!
-timestamp: 2015-10-31T14:57:02.934000
+timestamp: 2015-10-31T15:54:29.668000
 CREATE TABLE sensor(
     id INTEGER PRIMARY KEY AUTOINCREMENT,
     tipo_sensor CHAR(512),
     unidade CHAR(512)
 );
 success!
-timestamp: 2015-10-31T14:57:03.020000
+timestamp: 2015-10-31T15:54:29.782000
 CREATE TABLE hardwares(
     id INTEGER PRIMARY KEY AUTOINCREMENT,
     descricao CHAR(512),
@@ -86,7 +86,7 @@ CREATE TABLE hardwares(
     senha CHAR(512)
 );
 success!
-timestamp: 2015-10-31T14:57:03.132000
+timestamp: 2015-10-31T15:54:29.867000
 CREATE TABLE leituras(
     id INTEGER PRIMARY KEY AUTOINCREMENT,
     hardware INTEGER REFERENCES hardwares (id) ON DELETE CASCADE  ,
@@ -96,7 +96,7 @@ CREATE TABLE leituras(
     hora_leitura TIME
 );
 success!
-timestamp: 2015-10-31T14:57:03.240000
+timestamp: 2015-10-31T15:54:29.938000
 CREATE TABLE autoridades(
     id INTEGER PRIMARY KEY AUTOINCREMENT,
     nome CHAR(512),
@@ -105,13 +105,4 @@ CREATE TABLE autoridades(
     cidade INTEGER REFERENCES cidades (id) ON DELETE CASCADE  ,
     tipo CHAR(512)
 );
-success!
-success!
-success!
-success!
-success!
-success!
-success!
-success!
-success!
 success!

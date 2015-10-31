@@ -14,15 +14,17 @@ from gluon.contrib.appconfig import AppConfig
 ## once in production, remove reload=True to gain full speed
 myconf = AppConfig(reload=True)
 
-
+'''
 if request.is_local:
     ## if NOT running on Google App Engine use SQLite or other DB
-    db = DAL(myconf.take('db.uri'), pool_size=myconf.take('db.pool_size', cast=int), check_reserved=['all'])
+    db = DAL('sqlite://storage.db')
 else:
     #/Quando o sistema esta no servidor do pythonanywhere, o mesmo utiliza mysql
     db = DAL('mysql://monitorar:ar123@monitorar.mysql.pythonanywhere-services.com/$default')
 
-  
+'''
+
+db = DAL('mysql://u552527967_monit:ar123456@mysql.hostinger.com.br/u552527967_monit')
 
 ## by default give a view/generic.extension to all actions from localhost
 ## none otherwise. a pattern can be 'controller/function.extension'
