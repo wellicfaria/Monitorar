@@ -1,5 +1,5 @@
 (dp1
-S'data_leitura'
+S'hardware'
 p2
 (dp3
 S'length'
@@ -10,19 +10,19 @@ p5
 I00
 sS'sortable'
 p6
-I5
+I2
 sS'sql'
 p7
-S'DATE'
+S'INTEGER REFERENCES hardwares (id) ON DELETE CASCADE  '
 p8
 sS'notnull'
 p9
 I00
 sS'type'
 p10
-S'date'
+S'reference hardwares'
 p11
-ssS'id'
+ssS'data_leitura'
 p12
 (dp13
 g4
@@ -30,34 +30,18 @@ I512
 sg5
 I00
 sg6
-I1
+I5
 sg7
-S'INTEGER PRIMARY KEY AUTOINCREMENT'
+S'DATE'
 p14
 sg9
 I00
 sg10
-g12
-ssS'hardware'
+S'date'
 p15
-(dp16
-g4
-I512
-sg5
-I00
-sg6
-I2
-sg7
-S'INTEGER REFERENCES hardwares (id) ON DELETE CASCADE  '
-p17
-sg9
-I00
-sg10
-S'reference hardwares'
-p18
 ssS'valor'
-p19
-(dp20
+p16
+(dp17
 g4
 I512
 sg5
@@ -65,16 +49,21 @@ I00
 sg6
 I4
 sg7
+<<<<<<< HEAD
+S'INTEGER REFERENCES hardwares (id) ON DELETE CASCADE  '
+p17
+=======
 S'DOUBLE'
-p21
+p18
+>>>>>>> ca179f74fdbd7eda58e7bafcd632bdbea0700373
 sg9
 I00
 sg10
 S'double'
-p22
+p19
 ssS'sensor'
-p23
-(dp24
+p20
+(dp21
 g4
 I512
 sg5
@@ -83,15 +72,37 @@ sg6
 I3
 sg7
 S'INTEGER REFERENCES sensor (id) ON DELETE CASCADE  '
-p25
+p22
 sg9
 I00
 sg10
 S'reference sensor'
+p23
+ssS'id'
+p24
+(dp25
+g4
+I512
+sg5
+I00
+sg6
+I1
+sg7
+<<<<<<< HEAD
+S'INTEGER REFERENCES sensor (id) ON DELETE CASCADE  '
+p25
+=======
+S'INTEGER PRIMARY KEY AUTOINCREMENT'
 p26
-ssS'hora_leitura'
+>>>>>>> ca179f74fdbd7eda58e7bafcd632bdbea0700373
+sg9
+I00
+sg10
+S'id'
 p27
-(dp28
+ssS'hora_leitura'
+p28
+(dp29
 g4
 I512
 sg5
@@ -100,10 +111,10 @@ sg6
 I6
 sg7
 S'TIME'
-p29
+p30
 sg9
 I00
 sg10
 S'time'
-p30
+p31
 ss.

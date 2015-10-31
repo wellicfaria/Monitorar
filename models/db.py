@@ -15,18 +15,14 @@ from gluon.contrib.appconfig import AppConfig
 myconf = AppConfig(reload=True)
 
 
-if not request.env.web2py_runtime_gae:
+if request.is_local:
     ## if NOT running on Google App Engine use SQLite or other DB
     db = DAL(myconf.take('db.uri'), pool_size=myconf.take('db.pool_size', cast=int), check_reserved=['all'])
 else:
-    ## connect to Google BigTable (optional 'google:datastore://namespace')
-    db = DAL('google:datastore+ndb')
-    ## store sessions and tickets there
-    session.connect(request, response, db=db)
-    ## or store session in Memcache, Redis, etc.
-    ## from gluon.contrib.memdb import MEMDB
-    ## from google.appengine.api.memcache import Client
-    ## session.connect(request, response, db = MEMDB(Client()))
+    #/Quando o sistema esta no servidor do pythonanywhere, o mesmo utiliza mysql
+    db = DAL('mysql://monitorar:ar123@monitorar.mysql.pythonanywhere-services.com/$default')
+
+  
 
 ## by default give a view/generic.extension to all actions from localhost
 ## none otherwise. a pattern can be 'controller/function.extension'
@@ -148,4 +144,4 @@ db.define_table('autoridades',
      format='%(nome)s'
     )
 
-db.autoridades.nome.requires = IS_IN_SET(['Municipal', 'Estadual', 'Federal','Internacional'],error_message='Escolha uma autoridade!')
+db.autoridades.nome.requires = IS_IN_SET(['Municipal', 'Estadual', 'Federal','Internacional'],error_message='Escolha um tipo para a autoridade!')
