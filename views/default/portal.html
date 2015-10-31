@@ -30,6 +30,54 @@
     <link href="{{=URL('static','portal/bower_components/font-awesome/css/font-awesome.min.css')}}" rel="stylesheet" type="text/css">
 
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
+
+    <script type="text/javascript" src="https://www.google.com/jsapi"></script>
+    <script type="text/javascript">
+      google.load("visualization", "1", {packages:["corechart"]});
+      google.setOnLoadCallback(drawChart);
+      function drawChart() {
+        var data = google.visualization.arrayToDataTable([
+          ['Data', 'Metano', 'Monóxido de Carbono'],
+          ['31/10/15',  1000,      400],
+          ['01/11/15',  1170,      460],
+          ['02/11/15',  660,       1120],
+          ['03/11/15',  1030,      540]
+        ]);
+
+        var options = {
+          
+          hAxis: {title: 'Date',  titleTextStyle: {color: '#333'}},
+          vAxis: {minValue: 0}
+        };
+
+        var chart = new google.visualization.AreaChart(document.getElementById('chart_div'));
+        chart.draw(data, options);
+      }
+    </script>
+
+    <script type="text/javascript">
+      google.load("visualization", "1.1", {packages:["bar"]});
+      google.setOnLoadCallback(drawChart);
+      function drawChart() {
+        var data = google.visualization.arrayToDataTable([
+          ['Data', 'Metano', 'Monóxido de Carbono'],
+          ['2014', 1000, 400],
+          ['2015', 1170, 460],
+          ['2016', 660, 1120],
+          ['2017', 1030, 540]
+        ]);
+
+        var options = {
+          chart: {
+            
+          }
+        };
+
+        var chart = new google.charts.Bar(document.getElementById('columnchart_material'));
+
+        chart.draw(data, options);
+      }
+    </script>
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
     <!--[if lt IE 9]>
@@ -123,8 +171,7 @@
                                     <i class="fa fa-industry fa-5x"></i>
                                 </div>
                                 <div class="col-xs-9 text-right">
-                                    <div class="huge">26</div>
-                                    <div>Metano</div>
+                                    <div class="lead">Metano</div>
                                 </div>
                             </div>
                         </div>
@@ -139,8 +186,7 @@
                                     <i class="fa fa-cloud fa-5x"></i>
                                 </div>
                                 <div class="col-xs-9 text-right">
-                                    <div class="huge">12</div>
-                                    <div>Monóxido de Carbono</div>
+                                    <div class="lead">Monóxido de Carbono</div>
                                 </div>
                             </div>
                         </div>
@@ -157,9 +203,8 @@
                             
                         </div>
                         <!-- /.panel-heading -->
-                        <div class="panel-body">
-                            <div id="morris-area-chart"></div>
-                        </div>
+                
+                        <div id="chart_div" style="width: 700px; height: 500px;"></div>
                         <!-- /.panel-body -->
                     </div>
                     <!-- /.panel -->
@@ -193,8 +238,8 @@
                                     <!-- /.table-responsive -->
                                 </div>
                                 <!-- /.col-lg-4 (nested) -->
-                                <div class="col-lg-8">
-                                    <div id="morris-bar-chart"></div>
+                                 <div class="col-lg-8">
+                                    <div id="columnchart_material" style="width: 420px; height: 450px;"></div>
                                 </div>
                                 <!-- /.col-lg-8 (nested) -->
                             </div>

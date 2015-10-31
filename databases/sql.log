@@ -1,18 +1,108 @@
-timestamp: 2015-10-31T14:46:49.375000
+timestamp: 2015-10-31T14:57:01.996000
 CREATE TABLE estados(
     id INTEGER PRIMARY KEY AUTOINCREMENT,
     nome_estado CHAR(512),
     abreviacao CHAR(512)
 );
-timestamp: 2015-10-31T14:48:09.631000
-CREATE TABLE estados(
+success!
+timestamp: 2015-10-31T14:57:02.222000
+CREATE TABLE cidades(
     id INTEGER PRIMARY KEY AUTOINCREMENT,
-    nome_estado CHAR(512),
-    abreviacao CHAR(512)
+    nome_cidade CHAR(512),
+    estado INTEGER REFERENCES estados (id) ON DELETE CASCADE  
 );
-timestamp: 2015-10-31T14:48:10.674000
-CREATE TABLE estados(
+success!
+timestamp: 2015-10-31T14:57:02.309000
+CREATE TABLE auth_user(
     id INTEGER PRIMARY KEY AUTOINCREMENT,
-    nome_estado CHAR(512),
-    abreviacao CHAR(512)
+    first_name CHAR(128),
+    last_name CHAR(128),
+    email CHAR(512),
+    password CHAR(512),
+    registration_key CHAR(512),
+    reset_password_key CHAR(512),
+    registration_id CHAR(512),
+    cidade INTEGER REFERENCES cidades (id) ON DELETE CASCADE  
 );
+success!
+timestamp: 2015-10-31T14:57:02.427000
+CREATE TABLE auth_group(
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    role CHAR(512),
+    description TEXT
+);
+success!
+timestamp: 2015-10-31T14:57:02.525000
+CREATE TABLE auth_membership(
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    user_id INTEGER REFERENCES auth_user (id) ON DELETE CASCADE  ,
+    group_id INTEGER REFERENCES auth_group (id) ON DELETE CASCADE  
+);
+success!
+timestamp: 2015-10-31T14:57:02.642000
+CREATE TABLE auth_permission(
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    group_id INTEGER REFERENCES auth_group (id) ON DELETE CASCADE  ,
+    name CHAR(512),
+    table_name CHAR(512),
+    record_id INTEGER
+);
+success!
+timestamp: 2015-10-31T14:57:02.739000
+CREATE TABLE auth_event(
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    time_stamp TIMESTAMP,
+    client_ip CHAR(512),
+    user_id INTEGER REFERENCES auth_user (id) ON DELETE CASCADE  ,
+    origin CHAR(512),
+    description TEXT
+);
+success!
+timestamp: 2015-10-31T14:57:02.831000
+CREATE TABLE auth_cas(
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    user_id INTEGER REFERENCES auth_user (id) ON DELETE CASCADE  ,
+    created_on TIMESTAMP,
+    service CHAR(512),
+    ticket CHAR(512),
+    renew CHAR(1)
+);
+success!
+timestamp: 2015-10-31T14:57:02.934000
+CREATE TABLE sensor(
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    tipo_sensor CHAR(512),
+    unidade CHAR(512)
+);
+success!
+timestamp: 2015-10-31T14:57:03.020000
+CREATE TABLE hardwares(
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    descricao CHAR(512),
+    cidade INTEGER REFERENCES cidades (id) ON DELETE CASCADE  ,
+    latitude CHAR(512),
+    longitude CHAR(512),
+    sensores TEXT,
+    senha CHAR(512)
+);
+success!
+timestamp: 2015-10-31T14:57:03.132000
+CREATE TABLE leituras(
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    hardware INTEGER REFERENCES hardwares (id) ON DELETE CASCADE  ,
+    sensor INTEGER REFERENCES sensor (id) ON DELETE CASCADE  ,
+    valor DOUBLE,
+    data_leitura DATE,
+    hora_leitura TIME
+);
+success!
+timestamp: 2015-10-31T14:57:03.240000
+CREATE TABLE autoridades(
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    nome CHAR(512),
+    email CHAR(512),
+    telefone CHAR(512),
+    cidade INTEGER REFERENCES cidades (id) ON DELETE CASCADE  ,
+    tipo CHAR(512)
+);
+success!
