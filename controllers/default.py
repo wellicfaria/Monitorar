@@ -31,11 +31,26 @@ def portal():
     #formulário para setar o filto para aprententar os dados
     atual = date.today()
     final = date.fromordinal(atual.toordinal()-7) 
-    leituras=db((db.leituras.data_leitura<=atual) & (db.leituras.data_leitura>=final)).select()
+    leituras=db((db.leituras.data_leitura<=atual) & (db.leituras.data_leitura>=final) & (db.leituras.hardware.cidade==auth.user.cidade)).select()
     form = SQLFORM.factory(
         Field('date_atual', default=atual ,requires=[IS_NOT_EMPTY(),IS_DATE()]),
         Field('date_final', default=final ,requires=[IS_NOT_EMPTY(),IS_DATE()])
         )
+
+    #Grafico de linha
+    dados_do_grafico_metano=[]
+    dados_do_grafico_monoxido_de_carbono=[]
+    for dado in leituras:
+        aux = []
+        aux.append(dado.hora_leitura)
+        aux.append(dado.valor)
+        if dado.sensor.tipo_sensor.upper() =='METANO':
+            dados_do_grafico_metano.append(aux)
+        if dado.sensor.tipo_sensor.upper() =='MONOXIDO DE CARBONO':
+            dados_do_grafico_monoxido_de_carbono.append(aux)
+
+    grafico_metano=XML(dados_do_grafico_metano)
+    grafico_monoxido_de_carbono=XML(dados_do_grafico_monoxido_de_carbono)
 
     if form.process().accepted:
         response.flash = 'form accepted'
@@ -48,7 +63,7 @@ def portal():
     nome=db(db.auth_user.id==auth.user).select().last()
 
 
-    return {'nome':nome.first_name,'form':form,'leituras':leituras}
+    return {'nome':nome.first_name,'form':form,'leituras':leituras,'grafico_metano':grafico_metano,'grafico_monoxido_de_carbono':grafico_monoxido_de_carbono}
 
 
 
