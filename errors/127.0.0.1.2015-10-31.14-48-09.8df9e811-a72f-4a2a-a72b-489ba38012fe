@@ -1,0 +1,640 @@
+(dp1
+S'output'
+p2
+S"<class 'sqlite3.DatabaseError'> file is encrypted or is not a database"
+p3
+sS'layer'
+p4
+S'C:\\Users\\Jessica do Amaral\\Documents\\Web2py\\web2py\\applications\\monitorar\\models\\db.py'
+p5
+sS'code'
+p6
+S"# -*- coding: utf-8 -*-\n\n#########################################################################\n## This scaffolding model makes your app work on Google App Engine too\n## File is released under public domain and you can use without limitations\n#########################################################################\n\n## if SSL/HTTPS is properly configured and you want all HTTP requests to\n## be redirected to HTTPS, uncomment the line below:\n# request.requires_https()\n\n## app configuration made easy. Look inside private/appconfig.ini\nfrom gluon.contrib.appconfig import AppConfig\n## once in production, remove reload=True to gain full speed\nmyconf = AppConfig(reload=True)\n\n\nif not request.env.web2py_runtime_gae:\n    ## if NOT running on Google App Engine use SQLite or other DB\n    db = DAL(myconf.take('db.uri'), pool_size=myconf.take('db.pool_size', cast=int), check_reserved=['all'])\nelse:\n    ## connect to Google BigTable (optional 'google:datastore://namespace')\n    db = DAL('google:datastore+ndb')\n    ## store sessions and tickets there\n    session.connect(request, response, db=db)\n    ## or store session in Memcache, Redis, etc.\n    ## from gluon.contrib.memdb import MEMDB\n    ## from google.appengine.api.memcache import Client\n    ## session.connect(request, response, db = MEMDB(Client()))\n\n## by default give a view/generic.extension to all actions from localhost\n## none otherwise. a pattern can be 'controller/function.extension'\nresponse.generic_patterns = ['*'] if request.is_local else []\n## choose a style for forms\nresponse.formstyle = myconf.take('forms.formstyle')  # or 'bootstrap3_stacked' or 'bootstrap2' or other\nresponse.form_label_separator = myconf.take('forms.separator')\n\n\n## (optional) optimize handling of static files\n# response.optimize_css = 'concat,minify,inline'\n# response.optimize_js = 'concat,minify,inline'\n## (optional) static assets folder versioning\n# response.static_version = '0.0.0'\n#########################################################################\n## Here is sample code if you need for\n## - email capabilities\n## - authentication (registration, login, logout, ... )\n## - authorization (role based authorization)\n## - services (xml, csv, json, xmlrpc, jsonrpc, amf, rss)\n## - old style crud actions\n## (more options discussed in gluon/tools.py)\n#########################################################################\n\nfrom gluon.tools import Auth, Service, PluginManager\n\n\n\nauth = Auth(db)\nservice = Service()\nplugins = PluginManager()\n\n#Campos extras do usu\xc3\xa1rio\nauth.settings.extra_fields['auth_user']= [\n  Field('cidade', 'reference cidades')\n  ]\n\n#Tabela para armazenar as estados que possem o harware instalado\ndb.define_table('estados',\n    Field('nome_estado', type='string'),\n    Field('abreviacao', type='string'), \n    format='%(nome_estado)s'\n    )\n\n#Tabela para armazenar as cidades que possem o harware instalado\ndb.define_table('cidades',\n    Field('nome_cidade', type='string'),\n    Field('estado', 'reference estados'),\n    format='%(nome_cidade)s'\n    )\n\n\n\n## create all tables needed by auth if not custom tables\nauth.define_tables(username=False, signature=False)\n\n## configure email\nmail = auth.settings.mailer\nmail.settings.server = 'logging' if request.is_local else myconf.take('smtp.server')\nmail.settings.sender = myconf.take('smtp.sender')\nmail.settings.login = myconf.take('smtp.login')\n\n## configure auth policy\nauth.settings.registration_requires_verification = False\nauth.settings.registration_requires_approval = False\nauth.settings.reset_password_requires_verification = True\n\n#########################################################################\n## Define your tables below (or better in another model file) for example\n##\n## >>> db.define_table('mytable',Field('myfield','string'))\n##\n## Fields can be 'string','text','password','integer','double','boolean'\n##       'date','time','datetime','blob','upload', 'reference TABLENAME'\n## There is an implicit 'id integer autoincrement' field\n## Consult manual for more options, validators, etc.\n##\n## More API examples for controllers:\n##\n## >>> db.mytable.insert(myfield='value')\n## >>> rows=db(db.mytable.myfield=='value').select(db.mytable.ALL)\n## >>> for row in rows: print row.id, row.myfield\n#########################################################################\n\n## after defining tables, uncomment below to enable auditing\n# auth.enable_record_versioning(db)\n\ndb.define_table('sensor',\n    Field('tipo_sensor', type='string'),\n    Field('unidade', 'reference estados'),\n    format='%(tipo_sensor)s'\n    )\n\ndb.define_table('hardwares',\n    Field('descricao', type='string'),\n    Field('cidade', 'reference cidades'),\n    Field('latitude', type='string'),\n    Field('longitude', type='string'),\n    Field('sensores', 'list:reference sensor'),\n    Field('senha', 'string'),\n    format='%(descricao)s'\n    )\n\ndb.define_table('leituras',\n    Field('hardware', 'reference hardwares'),\n    Field('sensor', 'reference sensor'),\n    Field('valor', 'double'),\n    Field('data_leitura', 'date'),\n    Field('hora_leitura', 'time'),\n    format='%(sensor)s'\n    )"
+p7
+sS'snapshot'
+p8
+(dp9
+S'exception'
+p10
+(dp11
+S'__module__'
+p12
+S"'sqlite3'"
+p13
+sS'__getslice__'
+p14
+S"<method-wrapper '__getslice__' of DatabaseError object>"
+p15
+sS'__str__'
+p16
+S"<method-wrapper '__str__' of DatabaseError object>"
+p17
+sS'__reduce__'
+p18
+S'<built-in method __reduce__ of DatabaseError object>'
+p19
+sS'__dict__'
+p20
+S'{}'
+p21
+sS'__sizeof__'
+p22
+S'<built-in method __sizeof__ of DatabaseError object>'
+p23
+sS'__weakref__'
+p24
+S'None'
+p25
+sS'__init__'
+p26
+S"<method-wrapper '__init__' of DatabaseError object>"
+p27
+sS'__setattr__'
+p28
+S"<method-wrapper '__setattr__' of DatabaseError object>"
+p29
+sS'__reduce_ex__'
+p30
+S'<built-in method __reduce_ex__ of DatabaseError object>'
+p31
+sS'__new__'
+p32
+S'<built-in method __new__ of type object>'
+p33
+sS'__format__'
+p34
+S'<built-in method __format__ of DatabaseError object>'
+p35
+sS'__class__'
+p36
+S"<class 'sqlite3.DatabaseError'>"
+p37
+sS'__doc__'
+p38
+S'None'
+p39
+sS'__getitem__'
+p40
+S"<method-wrapper '__getitem__' of DatabaseError object>"
+p41
+sS'__setstate__'
+p42
+S'<built-in method __setstate__ of DatabaseError object>'
+p43
+sS'__getattribute__'
+p44
+S"<method-wrapper '__getattribute__' of DatabaseError object>"
+p45
+sS'args'
+p46
+S"('file is encrypted or is not a database',)"
+p47
+sS'__subclasshook__'
+p48
+S'<built-in method __subclasshook__ of type object>'
+p49
+sS'__unicode__'
+p50
+S'<built-in method __unicode__ of DatabaseError object>'
+p51
+sS'__delattr__'
+p52
+S"<method-wrapper '__delattr__' of DatabaseError object>"
+p53
+sS'__repr__'
+p54
+S"<method-wrapper '__repr__' of DatabaseError object>"
+p55
+sS'__hash__'
+p56
+S"<method-wrapper '__hash__' of DatabaseError object>"
+p57
+ssS'evalue'
+p58
+S'file is encrypted or is not a database'
+p59
+sS'request'
+p60
+cgluon.html
+XML_unpickle
+p61
+(S's\x16_\x00\x00<div><table><tr><td style="font-weight:bold;vertical-align:top;">ajax</td><td style="vertical-align:top;">:</td><td><div>False</div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">application</td><td style="vertical-align:top;">:</td><td><div>monitorar</div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">args</td><td style="vertical-align:top;">:</td><td><div><table></table></div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">cid</td><td style="vertical-align:top;">:</td><td><div>None</div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">client</td><td style="vertical-align:top;">:</td><td><div>127.0.0.1</div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">controller</td><td style="vertical-align:top;">:</td><td><div>default</div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">cookies</td><td style="vertical-align:top;">:</td><td><div><table><tr><td style="font-weight:bold;vertical-align:top;">session_id_admin</td><td style="vertical-align:top;">:</td><td><div>127.0.0.1-d15bad57-72c8-4d37-b98e-c7a3163fd08f<table><tr><td style="font-weight:bold;vertical-align:top;">comment</td><td style="vertical-align:top;">:</td><td><div></div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">domain</td><td style="vertical-align:top;">:</td><td><div></div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">expires</td><td style="vertical-align:top;">:</td><td><div></div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">httponly</td><td style="vertical-align:top;">:</td><td><div></div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">max-age</td><td style="vertical-align:top;">:</td><td><div></div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">path</td><td style="vertical-align:top;">:</td><td><div></div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">secure</td><td style="vertical-align:top;">:</td><td><div></div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">version</td><td style="vertical-align:top;">:</td><td><div></div></td></tr></table></div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">session_id_monitorar</td><td style="vertical-align:top;">:</td><td><div>127.0.0.1-8b348cbc-4ccf-43be-8f0b-53d3a0ac354c<table><tr><td style="font-weight:bold;vertical-align:top;">comment</td><td style="vertical-align:top;">:</td><td><div></div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">domain</td><td style="vertical-align:top;">:</td><td><div></div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">expires</td><td style="vertical-align:top;">:</td><td><div></div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">httponly</td><td style="vertical-align:top;">:</td><td><div></div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">max-age</td><td style="vertical-align:top;">:</td><td><div></div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">path</td><td style="vertical-align:top;">:</td><td><div></div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">secure</td><td style="vertical-align:top;">:</td><td><div></div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">version</td><td style="vertical-align:top;">:</td><td><div></div></td></tr></table></div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">session_id_welcome</td><td style="vertical-align:top;">:</td><td><div>127.0.0.1-83a8e153-8f15-4d04-a610-61a1b43be7d5<table><tr><td style="font-weight:bold;vertical-align:top;">comment</td><td style="vertical-align:top;">:</td><td><div></div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">domain</td><td style="vertical-align:top;">:</td><td><div></div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">expires</td><td style="vertical-align:top;">:</td><td><div></div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">httponly</td><td style="vertical-align:top;">:</td><td><div></div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">max-age</td><td style="vertical-align:top;">:</td><td><div></div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">path</td><td style="vertical-align:top;">:</td><td><div></div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">secure</td><td style="vertical-align:top;">:</td><td><div></div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">version</td><td style="vertical-align:top;">:</td><td><div></div></td></tr></table></div></td></tr></table></div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">env</td><td style="vertical-align:top;">:</td><td><div><table><tr><td style="font-weight:bold;vertical-align:top;">HTTP_ACCEPT</td><td style="vertical-align:top;">:</td><td><div>text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8</div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">HTTP_ACCEPT_ENCODING</td><td style="vertical-align:top;">:</td><td><div>gzip, deflate, sdch</div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">HTTP_ACCEPT_LANGUAGE</td><td style="vertical-align:top;">:</td><td><div>pt-BR,pt;q=0.8,en-US;q=0.6,en;q=0.4</div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">HTTP_CACHE_CONTROL</td><td style="vertical-align:top;">:</td><td><div>max-age=0</div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">HTTP_CONNECTION</td><td style="vertical-align:top;">:</td><td><div>keep-alive</div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">HTTP_COOKIE</td><td style="vertical-align:top;">:</td><td><div>session_id_monitorar=127.0.0.1-8b348cbc-4ccf-43be-8f0b-53d3a0ac354c; session_id_welcome=127.0.0.1-83a8e153-8f15-4d04-a610-61a1b43be7d5; session_id_admin=127.0.0.1-d15bad57-72c8-4d37-b98e-c7a3163fd08f</div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">HTTP_HOST</td><td style="vertical-align:top;">:</td><td><div>127.0.0.1:8000</div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">HTTP_UPGRADE_INSECURE_REQUESTS</td><td style="vertical-align:top;">:</td><td><div>1</div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">HTTP_USER_AGENT</td><td style="vertical-align:top;">:</td><td><div>Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/46.0.2490.80 Safari/537.36</div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">PATH_INFO</td><td style="vertical-align:top;">:</td><td><div>/monitorar/default/index</div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">QUERY_STRING</td><td style="vertical-align:top;">:</td><td><div></div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">REMOTE_ADDR</td><td style="vertical-align:top;">:</td><td><div>127.0.0.1</div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">REMOTE_PORT</td><td style="vertical-align:top;">:</td><td><div>63949</div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">REQUEST_METHOD</td><td style="vertical-align:top;">:</td><td><div>GET</div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">SCRIPT_NAME</td><td style="vertical-align:top;">:</td><td><div></div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">SERVER_NAME</td><td style="vertical-align:top;">:</td><td><div>jessica</div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">SERVER_PORT</td><td style="vertical-align:top;">:</td><td><div>8000</div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">SERVER_PROTOCOL</td><td style="vertical-align:top;">:</td><td><div>HTTP/1.1</div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">SERVER_SOFTWARE</td><td style="vertical-align:top;">:</td><td><div>Rocket 1.2.6</div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">app_folders</td><td style="vertical-align:top;">:</td><td><div>set([&#x27;C:\\\\Users\\\\Jessica do Amaral\\\\Documents\\\\Web2py\\\\web2py\\\\applications\\\\admin\\\\&#x27;, &#x27;C:\\\\Users\\\\Jessica do Amaral\\\\Documents\\\\Web2py\\\\web2py\\\\applications\\\\welcome\\\\&#x27;, &#x27;C:\\\\Users\\\\Jessica do Amaral\\\\Documents\\\\Web2py\\\\web2py\\\\applications\\\\monitorar\\\\&#x27;])</div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">applications_parent</td><td style="vertical-align:top;">:</td><td><div>C:\\Users\\Jessica do Amaral\\Documents\\Web2py\\web2py</div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">cmd_args</td><td style="vertical-align:top;">:</td><td><div><table></table></div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">cmd_options</td><td style="vertical-align:top;">:</td><td><div>&lt;Values at 0x2c655f8: {&#x27;verbose&#x27;: False, &#x27;ip&#x27;: &#x27;127.0.0.1&#x27;, &#x27;debuglevel&#x27;: 30, &#x27;with_scheduler&#x27;: False, &#x27;ips&#x27;: [], &#x27;shutdown_timeout&#x27;: 5, &#x27;taskbar&#x27;: False, &#x27;with_coverage&#x27;: False, &#x27;scheduler_groups&#x27;: None, &#x27;port&#x27;: 8000, &#x27;maxthreads&#x27;: None, &#x27;softcron&#x27;: False, &#x27;server_name&#x27;: &#x27;jessica&#x27;, &#x27;bpython&#x27;: False, &#x27;nogui&#x27;: False, &#x27;pid_filename&#x27;: &#x27;httpserver.pid&#x27;, &#x27;print_errors&#x27;: False, &#x27;extcron&#x27;: False, &#x27;runcron&#x27;: False, &#x27;run_system_tests&#x27;: False, &#x27;test&#x27;: None, &#x27;folder&#x27;: &#x27;C:\\\\Users\\\\Jessica do Amaral\\\\Documents\\\\Web2py\\\\web2py&#x27;, &#x27;config&#x27;: &#x27;&#x27;, &#x27;minthreads&#x27;: None, &#x27;shell&#x27;: None, &#x27;run&#x27;: &#x27;&#x27;, &#x27;log_filename&#x27;: &#x27;httpserver.log&#x27;, &#x27;profiler_dir&#x27;: None, &#x27;args&#x27;: [&#x27;&#x27;], &#x27;socket_timeout&#x27;: 5, &#x27;ssl_ca_certificate&#x27;: None, &#x27;scheduler&#x27;: None, &#x27;interfaces&#x27;: None, &#x27;ssl_private_key&#x27;: &#x27;&#x27;, &#x27;gae&#x27;: None, &#x27;password&#x27;: &#x27;&lt;ask&gt;&#x27;, &#x27;request_queue_size&#x27;: 5, &#x27;ssl_certificate&#x27;: &#x27;&#x27;, &#x27;cronjob&#x27;: False, &#x27;numthreads&#x27;: None, &#x27;quiet&#x27;: False, &#x27;import_models&#x27;: False, &#x27;timeout&#x27;: 10, &#x27;plain&#x27;: False, &#x27;nobanner&#x27;: False}&gt;</div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">db_sessions</td><td style="vertical-align:top;">:</td><td><div>set([])</div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">debugging</td><td style="vertical-align:top;">:</td><td><div>False</div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">gluon_parent</td><td style="vertical-align:top;">:</td><td><div>C:\\Users\\Jessica do Amaral\\Documents\\Web2py\\web2py</div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">http_accept</td><td style="vertical-align:top;">:</td><td><div>text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8</div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">http_accept_encoding</td><td style="vertical-align:top;">:</td><td><div>gzip, deflate, sdch</div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">http_accept_language</td><td style="vertical-align:top;">:</td><td><div>pt-BR,pt;q=0.8,en-US;q=0.6,en;q=0.4</div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">http_cache_control</td><td style="vertical-align:top;">:</td><td><div>max-age=0</div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">http_connection</td><td style="vertical-align:top;">:</td><td><div>keep-alive</div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">http_cookie</td><td style="vertical-align:top;">:</td><td><div>session_id_monitorar=127.0.0.1-8b348cbc-4ccf-43be-8f0b-53d3a0ac354c; session_id_welcome=127.0.0.1-83a8e153-8f15-4d04-a610-61a1b43be7d5; session_id_admin=127.0.0.1-d15bad57-72c8-4d37-b98e-c7a3163fd08f</div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">http_host</td><td style="vertical-align:top;">:</td><td><div>127.0.0.1:8000</div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">http_upgrade_insecure_requests</td><td style="vertical-align:top;">:</td><td><div>1</div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">http_user_agent</td><td style="vertical-align:top;">:</td><td><div>Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/46.0.2490.80 Safari/537.36</div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">is_jython</td><td style="vertical-align:top;">:</td><td><div>False</div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">is_pypy</td><td style="vertical-align:top;">:</td><td><div>False</div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">is_source</td><td style="vertical-align:top;">:</td><td><div>False</div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">local_hosts</td><td style="vertical-align:top;">:</td><td><div><table><tr><td><div>fe80::28e7:d84:f5ff:8664%7</div></td></tr><tr><td><div>jessica</div></td></tr><tr><td><div>10.0.121.155</div></td></tr><tr><td><div>fe80::4d6c:50ca:c43f:41f9%4</div></td></tr><tr><td><div>::ffff:127.0.0.1</div></td></tr><tr><td><div>::1</div></td></tr><tr><td><div>2001:0:5ef5:79fb:28e7:d84:f5ff:8664</div></td></tr><tr><td><div>127.0.0.1</div></td></tr><tr><td><div>jessica.wll-inatel.inatel.br</div></td></tr></table></div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">path_info</td><td style="vertical-align:top;">:</td><td><div>/monitorar/default/index</div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">query_string</td><td style="vertical-align:top;">:</td><td><div></div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">remote_addr</td><td style="vertical-align:top;">:</td><td><div>127.0.0.1</div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">remote_port</td><td style="vertical-align:top;">:</td><td><div>63949</div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">request_method</td><td style="vertical-align:top;">:</td><td><div>GET</div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">request_uri</td><td style="vertical-align:top;">:</td><td><div>/monitorar/default/index</div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">script_name</td><td style="vertical-align:top;">:</td><td><div></div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">server_name</td><td style="vertical-align:top;">:</td><td><div>jessica</div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">server_port</td><td style="vertical-align:top;">:</td><td><div>8000</div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">server_protocol</td><td style="vertical-align:top;">:</td><td><div>HTTP/1.1</div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">server_software</td><td style="vertical-align:top;">:</td><td><div>Rocket 1.2.6</div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">web2py_path</td><td style="vertical-align:top;">:</td><td><div>C:\\Users\\Jessica do Amaral\\Documents\\Web2py\\web2py</div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">web2py_version</td><td style="vertical-align:top;">:</td><td><div>2.12.3-stable+timestamp.2015.08.19.00.18.03</div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">wsgi.errors</td><td style="vertical-align:top;">:</td><td><div>&lt;open file &#x27;&lt;stderr&gt;&#x27;, mode &#x27;w&#x27; at 0x01CAD0D0&gt;</div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">wsgi.file_wrapper</td><td style="vertical-align:top;">:</td><td><div>&lt;class wsgiref.util.FileWrapper at 0x02015960&gt;</div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">wsgi.input</td><td style="vertical-align:top;">:</td><td><div>&lt;socket._fileobject object at 0x03DF2130&gt;</div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">wsgi.multiprocess</td><td style="vertical-align:top;">:</td><td><div>False</div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">wsgi.multithread</td><td style="vertical-align:top;">:</td><td><div>True</div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">wsgi.run_once</td><td style="vertical-align:top;">:</td><td><div>False</div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">wsgi.url_scheme</td><td style="vertical-align:top;">:</td><td><div>http</div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">wsgi.version</td><td style="vertical-align:top;">:</td><td><div><table><tr><td><div>1</div></td></tr><tr><td><div>0</div></td></tr></table></div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">wsgi_errors</td><td style="vertical-align:top;">:</td><td><div>&lt;open file &#x27;&lt;stderr&gt;&#x27;, mode &#x27;w&#x27; at 0x01CAD0D0&gt;</div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">wsgi_file_wrapper</td><td style="vertical-align:top;">:</td><td><div>&lt;class wsgiref.util.FileWrapper at 0x02015960&gt;</div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">wsgi_input</td><td style="vertical-align:top;">:</td><td><div>&lt;socket._fileobject object at 0x03DF2130&gt;</div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">wsgi_multiprocess</td><td style="vertical-align:top;">:</td><td><div>False</div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">wsgi_multithread</td><td style="vertical-align:top;">:</td><td><div>True</div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">wsgi_run_once</td><td style="vertical-align:top;">:</td><td><div>False</div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">wsgi_url_scheme</td><td style="vertical-align:top;">:</td><td><div>http</div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">wsgi_version</td><td style="vertical-align:top;">:</td><td><div><table><tr><td><div>1</div></td></tr><tr><td><div>0</div></td></tr></table></div></td></tr></table></div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">extension</td><td style="vertical-align:top;">:</td><td><div>html</div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">folder</td><td style="vertical-align:top;">:</td><td><div>C:\\Users\\Jessica do Amaral\\Documents\\Web2py\\web2py\\applications\\monitorar\\</div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">function</td><td style="vertical-align:top;">:</td><td><div>index</div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">global_settings</td><td style="vertical-align:top;">:</td><td><div><table><tr><td style="font-weight:bold;vertical-align:top;">app_folders</td><td style="vertical-align:top;">:</td><td><div>set([&#x27;C:\\\\Users\\\\Jessica do Amaral\\\\Documents\\\\Web2py\\\\web2py\\\\applications\\\\admin\\\\&#x27;, &#x27;C:\\\\Users\\\\Jessica do Amaral\\\\Documents\\\\Web2py\\\\web2py\\\\applications\\\\welcome\\\\&#x27;, &#x27;C:\\\\Users\\\\Jessica do Amaral\\\\Documents\\\\Web2py\\\\web2py\\\\applications\\\\monitorar\\\\&#x27;])</div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">applications_parent</td><td style="vertical-align:top;">:</td><td><div>C:\\Users\\Jessica do Amaral\\Documents\\Web2py\\web2py</div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">cmd_args</td><td style="vertical-align:top;">:</td><td><div><table></table></div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">cmd_options</td><td style="vertical-align:top;">:</td><td><div>&lt;Values at 0x2c655f8: {&#x27;verbose&#x27;: False, &#x27;ip&#x27;: &#x27;127.0.0.1&#x27;, &#x27;debuglevel&#x27;: 30, &#x27;with_scheduler&#x27;: False, &#x27;ips&#x27;: [], &#x27;shutdown_timeout&#x27;: 5, &#x27;taskbar&#x27;: False, &#x27;with_coverage&#x27;: False, &#x27;scheduler_groups&#x27;: None, &#x27;port&#x27;: 8000, &#x27;maxthreads&#x27;: None, &#x27;softcron&#x27;: False, &#x27;server_name&#x27;: &#x27;jessica&#x27;, &#x27;bpython&#x27;: False, &#x27;nogui&#x27;: False, &#x27;pid_filename&#x27;: &#x27;httpserver.pid&#x27;, &#x27;print_errors&#x27;: False, &#x27;extcron&#x27;: False, &#x27;runcron&#x27;: False, &#x27;run_system_tests&#x27;: False, &#x27;test&#x27;: None, &#x27;folder&#x27;: &#x27;C:\\\\Users\\\\Jessica do Amaral\\\\Documents\\\\Web2py\\\\web2py&#x27;, &#x27;config&#x27;: &#x27;&#x27;, &#x27;minthreads&#x27;: None, &#x27;shell&#x27;: None, &#x27;run&#x27;: &#x27;&#x27;, &#x27;log_filename&#x27;: &#x27;httpserver.log&#x27;, &#x27;profiler_dir&#x27;: None, &#x27;args&#x27;: [&#x27;&#x27;], &#x27;socket_timeout&#x27;: 5, &#x27;ssl_ca_certificate&#x27;: None, &#x27;scheduler&#x27;: None, &#x27;interfaces&#x27;: None, &#x27;ssl_private_key&#x27;: &#x27;&#x27;, &#x27;gae&#x27;: None, &#x27;password&#x27;: &#x27;&lt;ask&gt;&#x27;, &#x27;request_queue_size&#x27;: 5, &#x27;ssl_certificate&#x27;: &#x27;&#x27;, &#x27;cronjob&#x27;: False, &#x27;numthreads&#x27;: None, &#x27;quiet&#x27;: False, &#x27;import_models&#x27;: False, &#x27;timeout&#x27;: 10, &#x27;plain&#x27;: False, &#x27;nobanner&#x27;: False}&gt;</div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">db_sessions</td><td style="vertical-align:top;">:</td><td><div>set([])</div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">debugging</td><td style="vertical-align:top;">:</td><td><div>False</div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">gluon_parent</td><td style="vertical-align:top;">:</td><td><div>C:\\Users\\Jessica do Amaral\\Documents\\Web2py\\web2py</div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">is_jython</td><td style="vertical-align:top;">:</td><td><div>False</div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">is_pypy</td><td style="vertical-align:top;">:</td><td><div>False</div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">is_source</td><td style="vertical-align:top;">:</td><td><div>False</div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">local_hosts</td><td style="vertical-align:top;">:</td><td><div><table><tr><td><div>fe80::28e7:d84:f5ff:8664%7</div></td></tr><tr><td><div>jessica</div></td></tr><tr><td><div>10.0.121.155</div></td></tr><tr><td><div>fe80::4d6c:50ca:c43f:41f9%4</div></td></tr><tr><td><div>::ffff:127.0.0.1</div></td></tr><tr><td><div>::1</div></td></tr><tr><td><div>2001:0:5ef5:79fb:28e7:d84:f5ff:8664</div></td></tr><tr><td><div>127.0.0.1</div></td></tr><tr><td><div>jessica.wll-inatel.inatel.br</div></td></tr></table></div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">web2py_version</td><td style="vertical-align:top;">:</td><td><div>2.12.3-stable+timestamp.2015.08.19.00.18.03</div></td></tr></table></div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">is_https</td><td style="vertical-align:top;">:</td><td><div>False</div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">is_local</td><td style="vertical-align:top;">:</td><td><div>True</div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">is_restful</td><td style="vertical-align:top;">:</td><td><div>False</div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">is_sheduler</td><td style="vertical-align:top;">:</td><td><div>None</div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">is_shell</td><td style="vertical-align:top;">:</td><td><div>None</div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">now</td><td style="vertical-align:top;">:</td><td><div>datetime.datetime(2015, 10, 31, 14, 48, 9, 620000)</div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">raw_args</td><td style="vertical-align:top;">:</td><td><div></div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">raw_extension</td><td style="vertical-align:top;">:</td><td><div>None</div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">url</td><td style="vertical-align:top;">:</td><td><div>/monitorar/default/index</div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">utcnow</td><td style="vertical-align:top;">:</td><td><div>datetime.datetime(2015, 10, 31, 16, 48, 9, 620000)</div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">wsgi</td><td style="vertical-align:top;">:</td><td><div>&lt;gluon.main.LazyWSGI object at 0x03AF40F0&gt;</div></td></tr></table></div>'
+tRp62
+sS'frames'
+p63
+(lp64
+(dp65
+S'file'
+p66
+S'C:\\Users\\Jessica do Amaral\\Documents\\Web2py\\web2py\\gluon\\restricted.py'
+p67
+sS'dump'
+p68
+(dp69
+S'environment'
+p70
+S"{'A': <class 'gluon.html.A'>, 'ANY_OF': <class 'gluon.validators.ANY_OF'>, 'ASSIGNJS': <function ASSIGNJS>, 'AppConfig': <function AppConfig>, 'Auth': <class 'gluon.tools.Auth'>, 'B': <class 'gluon.html.B'>, 'BEAUTIFY': <class 'gluon.html.BEAUTIFY'>, 'BODY': <class 'gluon.html.BODY'>, 'BR': <class 'gluon.html.BR'>, 'BUTTON': <class 'gluon.html.BUTTON'>, ...}"
+p71
+sS'ccode'
+p72
+S'<code object <module> at 03C2D1D0, file "C:\\User...py\\applications\\monitorar\\models\\db.py", line 13>'
+p73
+ssS'lnum'
+p74
+I227
+sS'lines'
+p75
+(dp76
+I224
+S'            ccode = code'
+p77
+sI225
+S'        else:'
+p78
+sI226
+S'            ccode = compile2(code, layer)'
+p79
+sI227
+S'        exec ccode in environment'
+p80
+sI228
+S'    except HTTP:'
+p81
+sI229
+S'        raise'
+p82
+sI230
+S'    except RestrictedError:'
+p83
+sI231
+S'        # do not encapsulate (obfuscate) the original RestrictedError'
+p84
+sI222
+S'    try:'
+p85
+sI223
+S'        if isinstance(code, types.CodeType):'
+p86
+ssS'call'
+p87
+S'(code="# -*- coding: utf-8 -*-\\n\\n#######################..._leitura\', \'time\'),\\n    format=\'%(sensor)s\'\\n    )", environment={\'A\': <class \'gluon.html.A\'>, \'ANY_OF\': <class \'gluon.validators.ANY_OF\'>, \'ASSIGNJS\': <function ASSIGNJS>, \'AppConfig\': <function AppConfig>, \'Auth\': <class \'gluon.tools.Auth\'>, \'B\': <class \'gluon.html.B\'>, \'BEAUTIFY\': <class \'gluon.html.BEAUTIFY\'>, \'BODY\': <class \'gluon.html.BODY\'>, \'BR\': <class \'gluon.html.BR\'>, \'BUTTON\': <class \'gluon.html.BUTTON\'>, ...}, layer=r\'C:\\Users\\Jessica do Amaral\\Documents\\Web2py\\web2py\\applications\\monitorar\\models\\db.py\')'
+p88
+sS'func'
+p89
+S'restricted'
+p90
+sa(dp91
+g66
+S'C:\\Users\\Jessica do Amaral\\Documents\\Web2py\\web2py\\applications\\monitorar\\models\\db.py'
+p92
+sg68
+(dp93
+S'builtinformat'
+p94
+S'<built-in function format>'
+p95
+ssg74
+I71
+sg75
+(dp96
+I66
+S''
+sI67
+S'#Tabela para armazenar as estados que possem o harware instalado'
+p97
+sI68
+S"db.define_table('estados',"
+p98
+sI69
+S"    Field('nome_estado', type='string'),"
+p99
+sI70
+S"    Field('abreviacao', type='string'),"
+p100
+sI71
+S"    format='%(nome_estado)s'"
+p101
+sI72
+S'    )'
+p102
+sI73
+S''
+sI74
+S'#Tabela para armazenar as cidades que possem o harware instalado'
+p103
+sI75
+S"db.define_table('cidades',"
+p104
+ssg87
+S'()'
+p105
+sg89
+S'<module>'
+p106
+sa(dp107
+g66
+S'C:\\Users\\Jessica do Amaral\\Documents\\Web2py\\web2py\\gluon\\packages\\dal\\pydal\\base.py'
+p108
+sg68
+(dp109
+S'fields'
+p110
+S'(<pydal.objects.Field object>, <pydal.objects.Field object>)'
+p111
+sS'self'
+p112
+S'<DAL uri="sqlite://storage.sqlite">'
+p113
+sS'args'
+p114
+S"{'format': '%(nome_estado)s'}"
+p115
+sS'tablename'
+p116
+S"'estados'"
+p117
+sS'table'
+p118
+S'undefined'
+p119
+sS'self.lazy_define_table'
+p120
+S'<bound method DAL.lazy_define_table of <DAL uri="sqlite://storage.sqlite">>'
+p121
+ssg74
+I819
+sg75
+(dp122
+I814
+S'                    % (tablename,invalid_args))'
+p123
+sI815
+S'        if self._lazy_tables and tablename not in self._LAZY_TABLES:'
+p124
+sI816
+S'            self._LAZY_TABLES[tablename] = (tablename,fields,args)'
+p125
+sI817
+S'            table = None'
+p126
+sI818
+S'        else:'
+p127
+sI819
+S'            table = self.lazy_define_table(tablename,*fields,**args)'
+p128
+sI820
+S'        if not tablename in self.tables:'
+p129
+sI821
+S'            self.tables.append(tablename)'
+p130
+sI822
+S'        return table'
+p131
+sI823
+S''
+ssg87
+S'(self=<DAL uri="sqlite://storage.sqlite">, tablename=\'estados\', *fields=(<pydal.objects.Field object>, <pydal.objects.Field object>), **args={\'format\': \'%(nome_estado)s\'})'
+p132
+sg89
+S'define_table'
+p133
+sa(dp134
+g66
+S'C:\\Users\\Jessica do Amaral\\Documents\\Web2py\\web2py\\gluon\\packages\\dal\\pydal\\base.py'
+p135
+sg68
+(dp136
+S'polymodel'
+p137
+S'None'
+p138
+ssg74
+I858
+sg75
+(dp139
+I853
+S'            try:'
+p140
+sI854
+S'                GLOBAL_LOCKER.acquire()'
+p141
+sI855
+S'                self._lastsql = self._adapter.create_table('
+p142
+sI856
+S'                    table,migrate=migrate,'
+p143
+sI857
+S'                    fake_migrate=fake_migrate,'
+p144
+sI858
+S'                    polymodel=polymodel)'
+p145
+sI859
+S'            finally:'
+p146
+sI860
+S'                GLOBAL_LOCKER.release()'
+p147
+sI861
+S'        else:'
+p148
+sI862
+S'            table._dbt = None'
+p149
+ssg87
+S'(self=<DAL uri="sqlite://storage.sqlite">, tablename=\'estados\', *fields=(<pydal.objects.Field object>, <pydal.objects.Field object>), **args={\'format\': \'%(nome_estado)s\'})'
+p150
+sg89
+S'lazy_define_table'
+p151
+sa(dp152
+g66
+S'C:\\Users\\Jessica do Amaral\\Documents\\Web2py\\web2py\\gluon\\packages\\dal\\pydal\\adapters\\base.py'
+p153
+sg68
+(dp154
+S'query'
+p155
+S"'CREATE TABLE estados(\\n    id INTEGER PRIMARY KEY...ome_estado CHAR(512),\\n    abreviacao CHAR(512)\\n);'"
+p156
+sS'self'
+p157
+S'<pydal.adapters.sqlite.SQLiteAdapter object>'
+p158
+sS'table'
+p159
+S'<Table estados (id,nome_estado,abreviacao)>'
+p160
+sS'self.create_sequence_and_triggers'
+p161
+S'<bound method SQLiteAdapter.create_sequence_and_... of <pydal.adapters.sqlite.SQLiteAdapter object>>'
+p162
+ssg74
+I475
+sg75
+(dp163
+I470
+S'            if table._dbt:'
+p164
+sI471
+S"                self.log('timestamp: %s\\n%s\\n'"
+p165
+sI472
+S'                         % (datetime.datetime.today().isoformat(),'
+p166
+sI473
+S'                            query), table)'
+p167
+sI474
+S'            if not fake_migrate:'
+p168
+sI475
+S'                self.create_sequence_and_triggers(query,table)'
+p169
+sI476
+S'                table._db.commit()'
+p170
+sI477
+S'                # Postgres geom fields are added now,'
+p171
+sI478
+S'                # after the table has been created'
+p172
+sI479
+S'                for query in postcreation_fields:'
+p173
+ssg87
+S'(self=<pydal.adapters.sqlite.SQLiteAdapter object>, table=<Table estados (id,nome_estado,abreviacao)>, migrate=True, fake_migrate=False, polymodel=None)'
+p174
+sg89
+S'create_table'
+p175
+sa(dp176
+g66
+S'C:\\Users\\Jessica do Amaral\\Documents\\Web2py\\web2py\\gluon\\packages\\dal\\pydal\\adapters\\base.py'
+p177
+sg68
+(dp178
+S'query'
+p179
+S"'CREATE TABLE estados(\\n    id INTEGER PRIMARY KEY...ome_estado CHAR(512),\\n    abreviacao CHAR(512)\\n);'"
+p180
+sS'self'
+p181
+S'<pydal.adapters.sqlite.SQLiteAdapter object>'
+p182
+sS'self.execute'
+p183
+S'<bound method SQLiteAdapter.execute of <pydal.adapters.sqlite.SQLiteAdapter object>>'
+p184
+ssg74
+I1359
+sg75
+(dp185
+I1354
+S''
+sI1355
+S'    def constraint_name(self, table, fieldname):'
+p186
+sI1356
+S"        return '%s_%s__constraint' % (table,fieldname)"
+p187
+sI1357
+S''
+sI1358
+S'    def create_sequence_and_triggers(self, query, table, **args):'
+p188
+sI1359
+S'        self.execute(query)'
+p189
+sI1360
+S''
+sI1361
+S''
+sI1362
+S'    def log_execute(self, *a, **b):'
+p190
+sI1363
+S'        if not self.connection: raise ValueError(a[0])'
+p191
+ssg87
+S"(self=<pydal.adapters.sqlite.SQLiteAdapter object>, query='CREATE TABLE estados(\\n    id INTEGER PRIMARY KEY...ome_estado CHAR(512),\\n    abreviacao CHAR(512)\\n);', table=<Table estados (id,nome_estado,abreviacao)>, **args={})"
+p192
+sg89
+S'create_sequence_and_triggers'
+p193
+sa(dp194
+g66
+S'C:\\Users\\Jessica do Amaral\\Documents\\Web2py\\web2py\\gluon\\packages\\dal\\pydal\\adapters\\base.py'
+p195
+sg68
+(dp196
+S'a'
+S"('CREATE TABLE estados(\\n    id INTEGER PRIMARY KEY...ome_estado CHAR(512),\\n    abreviacao CHAR(512)\\n);',)"
+p197
+sS'self'
+p198
+S'<pydal.adapters.sqlite.SQLiteAdapter object>'
+p199
+sS'b'
+g21
+sS'self.log_execute'
+p200
+S'<bound method SQLiteAdapter.log_execute of <pydal.adapters.sqlite.SQLiteAdapter object>>'
+p201
+ssg74
+I1378
+sg75
+(dp202
+I1376
+S''
+sI1377
+S'    def execute(self, *a, **b):'
+p203
+sI1378
+S'        return self.log_execute(*a, **b)'
+p204
+sI1379
+S''
+sI1380
+S'    def execute_test_query(self):'
+p205
+sI1381
+S'        return self.execute(self.test_query)'
+p206
+sI1382
+S''
+sI1373
+S'        self.db._timings.append((command,time.time()-t0))'
+p207
+sI1374
+S'        del self.db._timings[:-TIMINGSSIZE]'
+p208
+sI1375
+S'        return ret'
+p209
+ssg87
+S"(self=<pydal.adapters.sqlite.SQLiteAdapter object>, *a=('CREATE TABLE estados(\\n    id INTEGER PRIMARY KEY...ome_estado CHAR(512),\\n    abreviacao CHAR(512)\\n);',), **b={})"
+p210
+sg89
+S'execute'
+p211
+sa(dp212
+g66
+S'C:\\Users\\Jessica do Amaral\\Documents\\Web2py\\web2py\\gluon\\packages\\dal\\pydal\\adapters\\base.py'
+p213
+sg68
+(dp214
+S'a'
+S"('CREATE TABLE estados(\\n    id INTEGER PRIMARY KEY...ome_estado CHAR(512),\\n    abreviacao CHAR(512)\\n);',)"
+p215
+sS'b'
+g21
+sS'self'
+p216
+S'<pydal.adapters.sqlite.SQLiteAdapter object>'
+p217
+sS'ret'
+p218
+g119
+sS'self.cursor'
+p219
+S'<sqlite3.Cursor object>'
+p220
+sS'command'
+p221
+S"'CREATE TABLE estados(\\n    id INTEGER PRIMARY KEY...ome_estado CHAR(512),\\n    abreviacao CHAR(512)\\n);'"
+p222
+sS'self.cursor.execute'
+p223
+S'<built-in method execute of sqlite3.Cursor object>'
+p224
+ssg74
+I1372
+sg75
+(dp225
+I1376
+S''
+sI1367
+S'            command = self.filter_sql_command(command)'
+p226
+sI1368
+S'        if self.db._debug:'
+p227
+sI1369
+S"            self.db.logger.debug('SQL: %s' % command)"
+p228
+sI1370
+S'        self.db._lastsql = command'
+p229
+sI1371
+S'        t0 = time.time()'
+p230
+sI1372
+S'        ret = self.cursor.execute(command, *a[1:], **b)'
+p231
+sI1373
+S'        self.db._timings.append((command,time.time()-t0))'
+p232
+sI1374
+S'        del self.db._timings[:-TIMINGSSIZE]'
+p233
+sI1375
+S'        return ret'
+p234
+ssg87
+S"(self=<pydal.adapters.sqlite.SQLiteAdapter object>, *a=('CREATE TABLE estados(\\n    id INTEGER PRIMARY KEY...ome_estado CHAR(512),\\n    abreviacao CHAR(512)\\n);',), **b={})"
+p235
+sg89
+S'log_execute'
+p236
+sasS'pyver'
+p237
+S'Python 2.7.9: C:\\Users\\Jessica do Amaral\\Documents\\Web2py\\web2py\\web2py.exe (prefix: C:\\Python27)'
+p238
+sS'session'
+p239
+g61
+(S's\x98\x00\x00\x00<div><table><tr><td style="font-weight:bold;vertical-align:top;">flash</td><td style="vertical-align:top;">:</td><td><div></div></td></tr></table></div>'
+tRp240
+sS'etype'
+p241
+S"<class 'sqlite3.DatabaseError'>"
+p242
+sS'date'
+p243
+S'Sat Oct 31 14:48:09 2015'
+p244
+sS'response'
+p245
+g61
+(S's@\x18\x00\x00<div><table><tr><td style="font-weight:bold;vertical-align:top;">body</td><td style="vertical-align:top;">:</td><td><div>&lt;cStringIO.StringO object at 0x038F3D80&gt;</div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">cookies</td><td style="vertical-align:top;">:</td><td><div><table><tr><td style="font-weight:bold;vertical-align:top;">session_id_monitorar</td><td style="vertical-align:top;">:</td><td><div>127.0.0.1-8b348cbc-4ccf-43be-8f0b-53d3a0ac354c<table><tr><td style="font-weight:bold;vertical-align:top;">comment</td><td style="vertical-align:top;">:</td><td><div></div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">domain</td><td style="vertical-align:top;">:</td><td><div></div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">expires</td><td style="vertical-align:top;">:</td><td><div></div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">httponly</td><td style="vertical-align:top;">:</td><td><div></div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">max-age</td><td style="vertical-align:top;">:</td><td><div></div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">path</td><td style="vertical-align:top;">:</td><td><div>/</div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">secure</td><td style="vertical-align:top;">:</td><td><div></div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">version</td><td style="vertical-align:top;">:</td><td><div></div></td></tr></table></div></td></tr></table></div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">delimiters</td><td style="vertical-align:top;">:</td><td><div><table><tr><td><div>{{</div></td></tr><tr><td><div>}}</div></td></tr></table></div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">files</td><td style="vertical-align:top;">:</td><td><div><table></table></div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">flash</td><td style="vertical-align:top;">:</td><td><div></div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">form_label_separator</td><td style="vertical-align:top;">:</td><td><div></div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">formstyle</td><td style="vertical-align:top;">:</td><td><div>bootstrap3_inline</div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">generic_patterns</td><td style="vertical-align:top;">:</td><td><div><table><tr><td><div>*</div></td></tr></table></div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">headers</td><td style="vertical-align:top;">:</td><td><div><table><tr><td style="font-weight:bold;vertical-align:top;">X-Powered-By</td><td style="vertical-align:top;">:</td><td><div>web2py</div></td></tr></table></div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">menu</td><td style="vertical-align:top;">:</td><td><div><table></table></div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">meta</td><td style="vertical-align:top;">:</td><td><div><table></table></div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">models_to_run</td><td style="vertical-align:top;">:</td><td><div><table><tr><td><div>^\\w+\\.py$</div></td></tr><tr><td><div>^default/\\w+\\.py$</div></td></tr><tr><td><div>^default/index/\\w+\\.py$</div></td></tr></table></div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">postprocessing</td><td style="vertical-align:top;">:</td><td><div><table></table></div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">session_client</td><td style="vertical-align:top;">:</td><td><div>127.0.0.1</div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">session_cookie_compression_level</td><td style="vertical-align:top;">:</td><td><div>None</div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">session_cookie_expires</td><td style="vertical-align:top;">:</td><td><div>None</div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">session_cookie_key</td><td style="vertical-align:top;">:</td><td><div>None</div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">session_data_name</td><td style="vertical-align:top;">:</td><td><div>session_data_monitorar</div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">session_file</td><td style="vertical-align:top;">:</td><td><div>&lt;open file &#x27;C:\\\\Users\\\\Jessica do Amaral\\\\Documents\\\\Web2py\\\\web2py\\\\applications\\\\monitorar\\\\sessions\\\\10d\\\\146\\\\127.0.0.1-8b348cbc-4ccf-43be-8f0b-53d3a0ac354c&#x27;, mode &#x27;rb+&#x27; at 0x03C25B78&gt;</div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">session_filename</td><td style="vertical-align:top;">:</td><td><div>C:\\Users\\Jessica do Amaral\\Documents\\Web2py\\web2py\\applications\\monitorar\\sessions\\127.0.0.1-8b348cbc-4ccf-43be-8f0b-53d3a0ac354c</div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">session_hash</td><td style="vertical-align:top;">:</td><td><div>9fc81a0eead7beb71f1c812fd16edd8a</div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">session_id</td><td style="vertical-align:top;">:</td><td><div>127.0.0.1-8b348cbc-4ccf-43be-8f0b-53d3a0ac354c</div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">session_id_name</td><td style="vertical-align:top;">:</td><td><div>session_id_monitorar</div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">session_locked</td><td style="vertical-align:top;">:</td><td><div>True</div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">session_masterapp</td><td style="vertical-align:top;">:</td><td><div>monitorar</div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">session_new</td><td style="vertical-align:top;">:</td><td><div>False</div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">session_storage_type</td><td style="vertical-align:top;">:</td><td><div>file</div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">status</td><td style="vertical-align:top;">:</td><td><div>200</div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">view</td><td style="vertical-align:top;">:</td><td><div>default/index.html</div></td></tr></table></div>'
+tRp246
+sS'locals'
+p247
+(dp248
+S'a'
+S"('CREATE TABLE estados(\\n    id INTEGER PRIMARY KEY...ome_estado CHAR(512),\\n    abreviacao CHAR(512)\\n);',)"
+p249
+sS'self'
+p250
+S'<pydal.adapters.sqlite.SQLiteAdapter object>'
+p251
+sS'b'
+g21
+sS'command'
+p252
+S"'CREATE TABLE estados(\\n    id INTEGER PRIMARY KEY...ome_estado CHAR(512),\\n    abreviacao CHAR(512)\\n);'"
+p253
+sS't0'
+p254
+S'1446310089.631'
+p255
+sssS'traceback'
+p256
+S'Traceback (most recent call last):\n  File "C:\\Users\\Jessica do Amaral\\Documents\\Web2py\\web2py\\gluon\\restricted.py", line 227, in restricted\n    exec ccode in environment\n  File "C:\\Users\\Jessica do Amaral\\Documents\\Web2py\\web2py\\applications\\monitorar\\models\\db.py", line 71, in <module>\n    format=\'%(nome_estado)s\'\n  File "C:\\Users\\Jessica do Amaral\\Documents\\Web2py\\web2py\\gluon\\packages\\dal\\pydal\\base.py", line 819, in define_table\n    table = self.lazy_define_table(tablename,*fields,**args)\n  File "C:\\Users\\Jessica do Amaral\\Documents\\Web2py\\web2py\\gluon\\packages\\dal\\pydal\\base.py", line 858, in lazy_define_table\n    polymodel=polymodel)\n  File "C:\\Users\\Jessica do Amaral\\Documents\\Web2py\\web2py\\gluon\\packages\\dal\\pydal\\adapters\\base.py", line 475, in create_table\n    self.create_sequence_and_triggers(query,table)\n  File "C:\\Users\\Jessica do Amaral\\Documents\\Web2py\\web2py\\gluon\\packages\\dal\\pydal\\adapters\\base.py", line 1359, in create_sequence_and_triggers\n    self.execute(query)\n  File "C:\\Users\\Jessica do Amaral\\Documents\\Web2py\\web2py\\gluon\\packages\\dal\\pydal\\adapters\\base.py", line 1378, in execute\n    return self.log_execute(*a, **b)\n  File "C:\\Users\\Jessica do Amaral\\Documents\\Web2py\\web2py\\gluon\\packages\\dal\\pydal\\adapters\\base.py", line 1372, in log_execute\n    ret = self.cursor.execute(command, *a[1:], **b)\nDatabaseError: file is encrypted or is not a database\n'
+p257
+s.
