@@ -36,21 +36,32 @@
       google.load("visualization", "1", {packages:["corechart"]});
       google.setOnLoadCallback(drawChart);
       function drawChart() {
-        var data = google.visualization.arrayToDataTable([
-          ['Data', 'Metano', 'Monóxido de Carbono'],
-          ['31/10/15',  1000,      400],
-          ['01/11/15',  1170,      460],
-          ['02/11/15',  660,       1120],
-          ['03/11/15',  1030,      540]
-        ]);
+        var data = google.visualization.arrayToDataTable({{=grafico_metano}});
 
         var options = {
-          
+           title: 'Metano',
           hAxis: {title: 'Date',  titleTextStyle: {color: '#333'}},
           vAxis: {minValue: 0}
         };
 
         var chart = new google.visualization.AreaChart(document.getElementById('chart_div'));
+        chart.draw(data, options);
+      }
+    </script>
+
+    <script type="text/javascript">
+      google.load("visualization", "1", {packages:["corechart"]});
+      google.setOnLoadCallback(drawChart);
+      function drawChart() {
+        var data = google.visualization.arrayToDataTable({{=grafico_monoxido_de_carbono}});
+
+        var options = {
+          title: 'Monóxido de Carbono',
+          hAxis: {title: 'Data',  titleTextStyle: {color: '#333'}},
+          vAxis: {minValue: 0}
+        };
+
+        var chart = new google.visualization.AreaChart(document.getElementById('chart_div2'));
         chart.draw(data, options);
       }
     </script>
@@ -205,6 +216,7 @@
                         <!-- /.panel-heading -->
                 
                         <div id="chart_div" style="width: 700px; height: 500px;"></div>
+                         <div id="chart_div2" style="width: 700px; height: 500px;"></div>
                         <!-- /.panel-body -->
                     </div>
                     <!-- /.panel -->
