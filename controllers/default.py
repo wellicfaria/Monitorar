@@ -62,7 +62,8 @@ def portal():
 
     nome=db(db.auth_user.id==auth.user).select().last()
 
-
+    #retorno
+    
     return {'nome':nome.first_name,'form':form,'leituras':leituras,'grafico_metano':grafico_metano,'grafico_monoxido_de_carbono':grafico_monoxido_de_carbono}
 
 
