@@ -29,14 +29,34 @@ def index():
 @auth.requires_login()
 def portal():
     #formulário para setar o filto para aprententar os dados
+    usuario=db(db.auth_user.id==auth.user).select().last()
     atual = date.today()
     final = date.fromordinal(atual.toordinal()-7) 
-    leituras=db((db.leituras.data_leitura<=atual) & (db.leituras.data_leitura>=final)).select()
+    leituras=db((db.leituras.data_leitura<=atual) & (db.leituras.data_leitura>=final) ).select()
     form = SQLFORM.factory(
         Field('date_atual', default=atual ,requires=[IS_NOT_EMPTY(),IS_DATE()]),
         Field('date_final', default=final ,requires=[IS_NOT_EMPTY(),IS_DATE()])
         )
 
+    #Grafico de linha
+    dados_do_grafico_metano=[]
+    dados_do_grafico_metano.append(['Hora','Valor'])
+    dados_do_grafico_monoxido_de_carbono=[] 
+    dados_do_grafico_monoxido_de_carbono.append(['Hora','Valor'])
+
+
+    for dado in leituras:
+        aux = []
+        aux.append(dado.hora_leitura.strftime("%H:%M:%S"))
+        aux.append(dado.valor)
+        if dado.sensor.tipo_sensor.upper() =='METANO':
+            dados_do_grafico_metano.append(aux)
+        if dado.sensor.tipo_sensor.upper() =='MONOXIDO DE CARBONO':
+            dados_do_grafico_monoxido_de_carbono.append(aux)
+
+    grafico_metano=XML(dados_do_grafico_metano)
+    grafico_monoxido_de_carbono=XML(dados_do_grafico_monoxido_de_carbono)
+    print(grafico_metano)
     if form.process().accepted:
         response.flash = 'form accepted'
         leituras=db((db.leituras.data_leitura<=form.vars.date_atual) & (db.leituras.data_leitura>=form.vars.date_final)).select()
@@ -45,10 +65,9 @@ def portal():
 
 
 
-    nome=db(db.auth_user.id==auth.user).select().last()
-
-
-    return {'nome':nome.first_name,'form':form,'leituras':leituras}
+    #retorno
+    
+    return {'nome':usuario.first_name,'form':form,'leituras':leituras,'grafico_metano':grafico_metano,'grafico_monoxido_de_carbono':grafico_monoxido_de_carbono}
 
 
 
@@ -81,7 +100,6 @@ def download():
     http://..../[app]/default/download/[filename]
     """
     return response.download(request, db)
-
 
 def call():
     """

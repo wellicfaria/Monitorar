@@ -10,6 +10,7 @@
     <meta name="author" content="">
 
     <title>MonitorAR</title>
+   
 
     <!-- Bootstrap Core CSS -->
     <link href="{{=URL('static','portal/bower_components/bootstrap/dist/css/bootstrap.min.css')}}" rel="stylesheet">
@@ -29,6 +30,66 @@
     <!-- Custom Fonts -->
     <link href="{{=URL('static','portal/bower_components/font-awesome/css/font-awesome.min.css')}}" rel="stylesheet" type="text/css">
 
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
+
+    <script type="text/javascript" src="https://www.google.com/jsapi"></script>
+    <script type="text/javascript">
+      google.load("visualization", "1", {packages:["corechart"]});
+      google.setOnLoadCallback(drawChart);
+      function drawChart() {
+        var data = google.visualization.arrayToDataTable({{=grafico_metano}});
+
+        var options = {
+           title: 'Metano',
+          hAxis: {title: 'Date',  titleTextStyle: {color: '#333'}},
+          vAxis: {minValue: 0}
+        };
+
+        var chart = new google.visualization.AreaChart(document.getElementById('chart_div'));
+        chart.draw(data, options);
+      }
+    </script>
+
+    <script type="text/javascript">
+      google.load("visualization", "1", {packages:["corechart"]});
+      google.setOnLoadCallback(drawChart);
+      function drawChart() {
+        var data = google.visualization.arrayToDataTable({{=grafico_monoxido_de_carbono}});
+
+        var options = {
+          title: 'Monóxido de Carbono',
+          hAxis: {title: 'Data',  titleTextStyle: {color: '#333'}},
+          vAxis: {minValue: 0}
+        };
+
+        var chart = new google.visualization.AreaChart(document.getElementById('chart_div2'));
+        chart.draw(data, options);
+      }
+    </script>
+
+    <script type="text/javascript">
+      google.load("visualization", "1.1", {packages:["bar"]});
+      google.setOnLoadCallback(drawChart);
+      function drawChart() {
+        var data = google.visualization.arrayToDataTable([
+          ['Data', 'Metano', 'Monóxido de Carbono'],
+          ['2014', 1000, 400],
+          ['2015', 1170, 460],
+          ['2016', 660, 1120],
+          ['2017', 1030, 540]
+        ]);
+
+        var options = {
+          chart: {
+            
+          }
+        };
+
+        var chart = new google.charts.Bar(document.getElementById('columnchart_material'));
+
+        chart.draw(data, options);
+      }
+    </script>
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
     <!--[if lt IE 9]>
@@ -80,9 +141,14 @@
                     <ul class="nav" id="side-menu">
                         
                         <li>
-                            <a href="index.html"><i class="fa fa-dashboard fa-fw"></i> Paca Gorda</a>
+                            <a href="index.html"><i class="fa fa-balance-scale fa-fe"></i> Medições</a>
                         </li>
-                    
+                        <li>
+                            <a href="index.html"><i class="fa fa-map-marker fa-fe"></i> Mapeamento</a>
+                        </li>
+                        <li>
+                            <a href="index.html"><i class="fa fa-bell fa-fe"></i> Alertas</a>
+                        </li>
                     </ul>
                 </div>
                 <!-- /.sidebar-collapse -->
@@ -93,16 +159,6 @@
         <div id="page-wrapper">
             <div class="row">
                 <div class="col-lg-12">
-                
-                {{=form.custom.begin}}
-                <div class="row">
-                    <div class="col-md-4">Inicio: <div>{{=form.custom.widget.date_atual}}</div></div>
-                    <div class="col-md-4">Fim: <div>{{=form.custom.widget.date_final}}</div></div>
-                    <div class="col-md-4"> <br><div>{{=form.custom.submit}}</div> </div>
-                </div>
-                {{=form.custom.end}}
-    
-               
                     <h1 class="page-header">Gases</h1>
                 </div>
                 <!-- /.col-lg-12 -->
@@ -114,21 +170,13 @@
                         <div class="panel-heading">
                             <div class="row">
                                 <div class="col-xs-3">
-                                    <i class="fa fa-comments fa-5x"></i>
+                                    <i class="fa fa-industry fa-5x"></i>
                                 </div>
                                 <div class="col-xs-9 text-right">
-                                    <div class="huge">26</div>
-                                    <div>Metano</div>
+                                    <div class="lead">Metano</div>
                                 </div>
                             </div>
                         </div>
-                        <a href="#">
-                            <div class="panel-footer">
-                                <span class="pull-left">Ver detalhes</span>
-                                <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
-                                <div class="clearfix"></div>
-                            </div>
-                        </a>
                     </div>
                 </div>
 
@@ -137,21 +185,13 @@
                         <div class="panel-heading">
                             <div class="row">
                                 <div class="col-xs-3">
-                                    <i class="fa fa-tasks fa-5x"></i>
+                                    <i class="fa fa-cloud fa-5x"></i>
                                 </div>
                                 <div class="col-xs-9 text-right">
-                                    <div class="huge">12</div>
-                                    <div>Monóxido de Carbono</div>
+                                    <div class="lead">Monóxido de Carbono</div>
                                 </div>
                             </div>
                         </div>
-                        <a href="#">
-                            <div class="panel-footer">
-                                <span class="pull-left">Ver Detalhes</span>
-                                <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
-                                <div class="clearfix"></div>
-                            </div>
-                        </a>
                     </div>
                 </div>
 
@@ -165,17 +205,29 @@
                             
                         </div>
                         <!-- /.panel-heading -->
-                        <div class="panel-body">
-                            <div id="morris-area-chart"></div>
-                        </div>
+                
+                        <div id="chart_div" style="width: 700px; height: 500px;"></div>
+                         <div id="chart_div2" style="width: 700px; height: 500px;"></div>
                         <!-- /.panel-body -->
                     </div>
                     <!-- /.panel -->
+                    <div class="panel panel-default">
+                     {{=form.custom.begin}}
+                            <div class="row">
+                                <div class="col-md-4">Inicio: <div>{{=form.custom.widget.date_atual}}</div></div>
+                                <div class="col-md-4">Fim: <div>{{=form.custom.widget.date_final}}</div></div>
+                                <div class="col-md-4"> <br><div>{{=form.custom.submit}}</div> </div>
+                            </div>
+                        {{=form.custom.end}}
+                    </div>
+
+
                     <div class="panel panel-default">
                         <div class="panel-heading">
                             <i class="fa fa-bar-chart-o fa-fw"></i> Quantidades de poluentes
                         </div>
                         <!-- /.panel-heading -->
+    
                         <div class="panel-body">
                             <div class="row">
                                 <div class="col-lg-4">
@@ -183,15 +235,15 @@
                                         <table class="table table-bordered table-hover table-striped">
                                             <thead>
                                                 <tr>
-                                                    <th>Data</th>
-                                                    <th>Quantidade</th>
+                                                    <th>Máxima</th>
+                                                    <th>Minima</th>
                                                 </tr>
                                             </thead>
                                             <tbody>
                                                 
                                                 {{for leitura in leituras:}}
                                                     <tr>
-                                                        <td>{{=leitura.data_leitura}}</td>
+                                                        <td>{{=leitura.valor}}</td>
                                                         <td>{{=leitura.valor}}</td>
                                                     </tr>
                                                 {{pass}}
@@ -201,8 +253,8 @@
                                     <!-- /.table-responsive -->
                                 </div>
                                 <!-- /.col-lg-4 (nested) -->
-                                <div class="col-lg-8">
-                                    <div id="morris-bar-chart"></div>
+                                 <div class="col-lg-8">
+                                    <div id="columnchart_material" style="width: 420px; height: 450px;"></div>
                                 </div>
                                 <!-- /.col-lg-8 (nested) -->
                             </div>
@@ -210,13 +262,14 @@
                         </div>
                         <!-- /.panel-body -->
                     </div>
-                    <!-- /.panel -->
+                    <!-- /.panel -->x
                     <div class="panel panel-default">
-                        <div class="panel-heading">
-                            <i class="fa fa-clock-o fa-fw"></i> Curiosidades
+                        <div class="panel-heading"> 
+                            <i class="fa fa-map-marker fa-fw"></i> Mapa - Localização do Hardware
                         </div>
                         <!-- /.panel-heading -->
                         <div class="panel-body">
+                            <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3692.5828082300472!2d-45.7004963853695!3d-22.255902420563366!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x94cba24147a0dcaf%3A0xf38070283bd7e777!2sAv.+Jo%C3%A3o+de+Camargo%2C+Santa+Rita+do+Sapuca%C3%AD+-+MG%2C+37540-000!5e0!3m2!1spt-BR!2sbr!4v1446118633439" width="600" height="450" frameborder="0" style="border:0" allowfullscreen></iframe>
                             <ul class="timeline">
                                 <li>
                                     <div class="timeline-badge"><i class="fa fa-check"></i>
@@ -255,13 +308,13 @@
                 <div class="col-lg-4">
                     <div class="panel panel-default">
                         <div class="panel-heading">
-                            <i class="fa fa-bell fa-fw"></i> Painel de Notificações
+                            <i class="fa fa-bell fa-fw"></i> Alertas
                         </div>
                         <!-- /.panel-heading -->
                         <div class="panel-body">
                             <div class="list-group">
                                 <a href="#" class="list-group-item">
-                                    <i class="fa fa-comment fa-fw"></i> Comentários
+                                    <i class="fa fa-comment fa-fw"></i> Emails
                                     
                                     </span>
                                 </a>
@@ -277,15 +330,6 @@
                         <!-- /.panel-body -->
                     </div>
                     <!-- /.panel -->
-                    <div class="panel panel-default">
-                        <div class="panel-heading">
-                            <i class="fa fa-bar-chart-o fa-fw"></i> Gráfico de porcentagem
-                        </div>
-                        <div class="panel-body">
-                            <div id="morris-donut-chart"></div>
-                        </div>
-                        <!-- /.panel-body -->
-                    </div>
                     <!-- /.panel -->
                     
     <!-- /#wrapper -->
