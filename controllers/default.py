@@ -29,10 +29,20 @@ def index():
 @auth.requires_login()
 def portal():
     #formulário para setar o filto para aprententar os dados
+    
     usuario=db(db.auth_user.id==auth.user).select().last()
-    atual = date.today()
-    final = date.fromordinal(atual.toordinal()-7) 
+    
+    if len(request.args)==0:
+        atual = date.today()
+        final = date.fromordinal(atual.toordinal()-7) 
+    else:
+        atual = ''
+        final = '' 
+
+    
     leituras=db((db.leituras.data_leitura<=atual) & (db.leituras.data_leitura>=final) ).select()
+    datas_de_leituras= db((db.leituras.data_leitura<=atual) & (db.leituras.data_leitura>=final) ).select(db.leituras.data_leitura, distinct=True)
+
     form = SQLFORM.factory(
         Field('date_atual', default=atual ,requires=[IS_NOT_EMPTY(),IS_DATE()]),
         Field('date_final', default=final ,requires=[IS_NOT_EMPTY(),IS_DATE()])
@@ -41,6 +51,7 @@ def portal():
     #Grafico de linha
     dados_do_grafico_metano=[]
     dados_do_grafico_metano.append(['Hora','Valor'])
+    
     dados_do_grafico_monoxido_de_carbono=[] 
     dados_do_grafico_monoxido_de_carbono.append(['Hora','Valor'])
 
@@ -56,18 +67,59 @@ def portal():
 
     grafico_metano=XML(dados_do_grafico_metano)
     grafico_monoxido_de_carbono=XML(dados_do_grafico_monoxido_de_carbono)
-    print(grafico_metano)
+
+
+    #Tabela de maximo e minino
+    
+    #Formato: [ ['Data',Maximo, Minino], ['Data',Maximo, Minino] ...]
+
+    #Tabela de Metano
+    tabela_metano=[]
+    for data in datas_de_leituras:
+        leituras_diarias=db((db.leituras.data_leitura==data)&(db.leituras.sensor==db.sensor.id)&(db.sensor.tipo_sensor=='METANO')).select(db.leituras.valor)
+        
+        aux = []
+      
+        aux.append(data)
+        valor_maximo= max(leituras_diarias)
+        valor_minimo= min(leituras_diarias)
+        aux.append(valor_maximo)
+        aux.append(valor_minimo)
+        tabela_metano.append(aux)
+
+    #Tabela de Monoxido de Carbono
+    tabela_monoxido_de_carbono=[] 
+    for data in datas_de_leituras:
+        leituras_diarias=db((db.leituras.data_leitura==data)&(db.leituras.sensor==db.sensor.id)&(db.sensor.tipo_sensor=='MONOXIDO DE CARBONO')).select(db.leituras.valor)
+        
+        aux = []
+      
+        aux.append(data)
+        valor_maximo= max(leituras_diarias)
+        valor_minimo= min(leituras_diarias)
+        aux.append(valor_maximo)
+        aux.append(valor_minimo)
+        tabela_monoxido_de_carbono.append(aux)
+
+    #Formulário de entrada de datas para filtro. 
     if form.process().accepted:
         response.flash = 'form accepted'
         leituras=db((db.leituras.data_leitura<=form.vars.date_atual) & (db.leituras.data_leitura>=form.vars.date_final)).select()
     elif form.errors:
         response.flash = 'form has errors'
-
-
-
-    #retorno
     
-    return {'nome':usuario.first_name,'form':form,'leituras':leituras,'grafico_metano':grafico_metano,'grafico_monoxido_de_carbono':grafico_monoxido_de_carbono}
+    #Parametros de Retorno da função para gerar a portal
+    retorno = {}
+    retorno.update({'nome':usuario.first_name}) #Nome do Usuário Logado
+    retorno.update({'form':form}) #Formulário para setar a data para filtro de leituras
+    retorno.update({'leituras':leituras}) #Leituras filtradas para apresentar na view
+    retorno.update({'grafico_metano':grafico_metano}) #Dados para construção do gráfico de metano
+    retorno.update({'grafico_monoxido_de_carbono':grafico_monoxido_de_carbono}) #Dados para construção do gráfico de Monixido de Carbono
+    retorno.update({'tabela_metano':tabela_metano}) #Dados de Maxima e minimo sensor de metano
+    retorno.update({'tabela_monoxido_de_carbono':tabela_monoxido_de_carbono}) #Dados de Maxima e minimo sensor de Monoxido de carbono 
+    
+    #Retorna os dados para View
+    return retorno
 
 
 

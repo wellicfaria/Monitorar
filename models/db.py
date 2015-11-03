@@ -118,6 +118,8 @@ db.define_table('sensor',
     format='%(tipo_sensor)s'
     )
 
+db.sensor.tipo_sensor.requires = IS_IN_SET(['METANO','MONOXIDO DE CARBONO'],error_message='Escolha um tipo para a autoridade!')
+
 db.define_table('hardwares',
     Field('descricao', type='string'),
     Field('cidade', 'reference cidades'),
