@@ -224,7 +224,7 @@
 
                     <div class="panel panel-default">
                         <div class="panel-heading">
-                            <i class="fa fa-bar-chart-o fa-fw"></i> Quantidades de poluentes
+                            <i class="fa fa-bar-chart-o fa-fw"></i> Quantidades de poluentes - Metano
                         </div>
                         <!-- /.panel-heading -->
     
@@ -242,10 +242,54 @@
                                             </thead>
                                             <tbody>
                                                 
-                                                {{for leitura in leituras:}}
+                                                {{for dado_metano in tabela_metano:}}
                                                     <tr>
-                                                        <td>{{=leitura.valor}}</td>
-                                                        <td>{{=leitura.valor}}</td>
+                                                        <td>{{=dado_metano[0]}}</td>
+                                                        <td>{{=dado_metano[1]}}</td>
+                                                        <td>{{=dado_metano[2]}}</td>
+                                                    </tr>
+                                                {{pass}}
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                    <!-- /.table-responsive -->
+                                </div>
+                                <!-- /.col-lg-4 (nested) -->
+                                 <div class="col-lg-8">
+                                    <div id="columnchart_material" style="width: 420px; height: 450px;"></div>
+                                </div>
+                                <!-- /.col-lg-8 (nested) -->
+                            </div>
+                            <!-- /.row -->
+                        </div>
+                        <!-- /.panel-body -->
+                   
+                    </div>
+                         <div class="panel panel-default">
+                        <div class="panel-heading">
+                            <i class="fa fa-bar-chart-o fa-fw"></i> Quantidades de poluentes - Monoxido de Carbono
+                        </div>
+                        <!-- /.panel-heading -->
+    
+                        <div class="panel-body">
+                            <div class="row">
+                                <div class="col-lg-4">
+                                    <div class="table-responsive">
+                                        <table class="table table-bordered table-hover table-striped">
+                                            <thead>
+                                                <tr>
+                                                    <th>Data</th>
+                                                    <th>Máxima</th>
+                                                    <th>Minima</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                
+                                                {{for dado_m_carbono in tabela_monoxido_de_carbono:}}
+                                                    <tr>
+                                                        <td>{{=dado_m_carbono[0]}}</td>
+                                                        <td>{{=dado_m_carbono[1]}}</td>
+                                                        <td>{{=dado_m_carbono[2]}}</td>
                                                     </tr>
                                                 {{pass}}
                                             </tbody>
@@ -263,6 +307,7 @@
                         </div>
                         <!-- /.panel-body -->
                     </div>
+
                     <!-- /.panel -->x
                     <div class="panel panel-default">
                         <div class="panel-heading"> 

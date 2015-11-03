@@ -36,8 +36,8 @@ def portal():
         atual = date.today()
         final = date.fromordinal(atual.toordinal()-7) 
     else:
-        atual = ''
-        final = '' 
+        atual = request.args[0]
+        final = request.args[1]
 
     
     leituras=db((db.leituras.data_leitura<=atual) & (db.leituras.data_leitura>=final) ).select()
@@ -76,30 +76,31 @@ def portal():
     #Tabela de Metano
     tabela_metano=[]
     for data in datas_de_leituras:
-        leituras_diarias=db((db.leituras.data_leitura==data)&(db.leituras.sensor==db.sensor.id)&(db.sensor.tipo_sensor=='METANO')).select(db.leituras.valor)
-        
-        aux = []
-      
-        aux.append(data)
-        valor_maximo= max(leituras_diarias)
-        valor_minimo= min(leituras_diarias)
-        aux.append(valor_maximo)
-        aux.append(valor_minimo)
-        tabela_metano.append(aux)
+        leituras_diarias=db((db.leituras.data_leitura==data.data_leitura)&(db.leituras.sensor==db.sensor.id)&(db.sensor.tipo_sensor=='METANO')).select(db.leituras.valor)
+        if len(leituras_diarias)>0:
+            aux = []
+          
+            aux.append(data.data_leitura)
+            valor_maximo= max(leituras_diarias)
+            valor_minimo= min(leituras_diarias)
+            aux.append(valor_maximo.valor)
+            aux.append(valor_minimo.valor)
+            tabela_metano.append(aux)
 
     #Tabela de Monoxido de Carbono
     tabela_monoxido_de_carbono=[] 
     for data in datas_de_leituras:
-        leituras_diarias=db((db.leituras.data_leitura==data)&(db.leituras.sensor==db.sensor.id)&(db.sensor.tipo_sensor=='MONOXIDO DE CARBONO')).select(db.leituras.valor)
-        
-        aux = []
-      
-        aux.append(data)
-        valor_maximo= max(leituras_diarias)
-        valor_minimo= min(leituras_diarias)
-        aux.append(valor_maximo)
-        aux.append(valor_minimo)
-        tabela_monoxido_de_carbono.append(aux)
+
+        leituras_diarias=db((db.leituras.data_leitura==data.data_leitura)&(db.leituras.sensor==db.sensor.id)&(db.sensor.tipo_sensor=='MONOXIDO DE CARBONO')).select(db.leituras.valor)
+        if len(leituras_diarias)>0:
+            aux = []
+          
+            aux.append(data.data_leitura)
+            valor_maximo= max(leituras_diarias)
+            valor_minimo= min(leituras_diarias)
+            aux.append(valor_maximo.valor)
+            aux.append(valor_minimo.valor)
+            tabela_monoxido_de_carbono.append(aux)
 
     #Formulário de entrada de datas para filtro. 
     if form.process().accepted:
