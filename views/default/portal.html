@@ -90,6 +90,30 @@
         chart.draw(data, options);
       }
     </script>
+
+       <script type="text/javascript">
+      google.load("visualization", "1.1", {packages:["bar"]});
+      google.setOnLoadCallback(drawChart);
+      function drawChart() {
+        var data = google.visualization.arrayToDataTable([
+          ['Data', 'Metano', 'Monóxido de Carbono'],
+          ['2014', 1000, 400],
+          ['2015', 1170, 460],
+          ['2016', 660, 1120],
+          ['2017', 1030, 540]
+        ]);
+
+        var options = {
+          chart: {
+            
+          }
+        };
+
+        var chart = new google.charts.Bar(document.getElementById('columnchart_material2'));
+
+        chart.draw(data, options);
+      }
+    </script>
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
     <!--[if lt IE 9]>
@@ -163,6 +187,19 @@
                 </div>
                 <!-- /.col-lg-12 -->
             </div>
+
+                    <div class="panel panel-default">
+                     {{=form.custom.begin}}
+                            <div class="row">
+                                <div class="col-md-4">Inicio: <div>{{=form.custom.widget.date_atual}}</div></div>
+                                <div class="col-md-4">Fim: <div>{{=form.custom.widget.date_final}}</div></div>
+                                <div class="col-md-4"> <br><div>{{=form.custom.submit}}</div> </div>
+                            </div>
+                        {{=form.custom.end}}
+                        </br>
+                    </div>
+
+
             <!-- /.row -->
             <div class="row">
                 <div class="col-lg-3 col-md-6">
@@ -211,16 +248,6 @@
                         <!-- /.panel-body -->
                     </div>
                     <!-- /.panel -->
-                    <div class="panel panel-default">
-                     {{=form.custom.begin}}
-                            <div class="row">
-                                <div class="col-md-4">Inicio: <div>{{=form.custom.widget.date_atual}}</div></div>
-                                <div class="col-md-4">Fim: <div>{{=form.custom.widget.date_final}}</div></div>
-                                <div class="col-md-4"> <br><div>{{=form.custom.submit}}</div> </div>
-                            </div>
-                        {{=form.custom.end}}
-                    </div>
-
 
                     <div class="panel panel-default">
                         <div class="panel-heading">
@@ -280,7 +307,7 @@
                                                 <tr>
                                                     <th>Data</th>
                                                     <th>Máxima</th>
-                                                    <th>Minima</th>
+                                                    <th>Mínima</th>
                                                 </tr>
                                             </thead>
                                             <tbody>
@@ -299,7 +326,7 @@
                                 </div>
                                 <!-- /.col-lg-4 (nested) -->
                                  <div class="col-lg-8">
-                                    <div id="columnchart_material" style="width: 420px; height: 450px;"></div>
+                                    <div id="columnchart_material2" style="width: 420px; height: 450px;"></div>
                                 </div>
                                 <!-- /.col-lg-8 (nested) -->
                             </div>

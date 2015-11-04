@@ -9,7 +9,8 @@
 #########################################################################
 
 #Importação de Bibliotecas
-from datetime import date #Manipulação de datas
+from datetime import date
+from datetime import datetime #Manipulação de datas
 
 def index():
     """
@@ -34,18 +35,20 @@ def portal():
     
     if len(request.args)==0:
         atual = date.today()
-        final = date.fromordinal(atual.toordinal()-7) 
+        final = date.fromordinal(atual.toordinal()-7)
     else:
-        atual = request.args[0]
-        final = request.args[1]
 
-    
+        atual = datetime.strptime(request.args[0], '%Y-%m-%d').date()
+        final = datetime.strptime(request.args[1], '%Y-%m-%d').date()
+
     leituras=db((db.leituras.data_leitura<=atual) & (db.leituras.data_leitura>=final) ).select()
     datas_de_leituras= db((db.leituras.data_leitura<=atual) & (db.leituras.data_leitura>=final) ).select(db.leituras.data_leitura, distinct=True)
 
+   
+  
     form = SQLFORM.factory(
-        Field('date_atual', default=atual ,requires=[IS_NOT_EMPTY(),IS_DATE()]),
-        Field('date_final', default=final ,requires=[IS_NOT_EMPTY(),IS_DATE()])
+        Field('date_atual', type='date'  ,default=atual ,requires=[IS_NOT_EMPTY(),IS_DATE(format=T('%d/%m/%Y'))]),
+        Field('date_final', type='date' ,default=final ,requires=[IS_NOT_EMPTY(),IS_DATE(format=T('%d/%m/%Y'))])
         )
 
     #Grafico de linha
@@ -58,7 +61,7 @@ def portal():
 
     for dado in leituras:
         aux = []
-        aux.append(dado.hora_leitura.strftime("%H:%M:%S"))
+        aux.append(dado.data_leitura.strftime("%d/%m/%y")+" "+dado.hora_leitura.strftime("%H:%M:%S"))
         aux.append(dado.valor)
         if dado.sensor.tipo_sensor.upper() =='METANO':
             dados_do_grafico_metano.append(aux)
@@ -104,10 +107,13 @@ def portal():
 
     #Formulário de entrada de datas para filtro. 
     if form.process().accepted:
-        response.flash = 'form accepted'
-        leituras=db((db.leituras.data_leitura<=form.vars.date_atual) & (db.leituras.data_leitura>=form.vars.date_final)).select()
+        response.flash = 'Filtrando os dados ....'
+        args = []
+        args.append(str(form.vars.date_atual))
+        args.append(str(form.vars.date_final))
+        redirect(URL('portal', args=tuple(args)))
     elif form.errors:
-        response.flash = 'form has errors'
+        response.flash = 'Datas inválidas'
     
     #Parametros de Retorno da função para gerar a portal
     retorno = {}
@@ -177,7 +183,6 @@ def salvar_dados():
 
     resposta=HTML(BODY('<erro>', XML('<p>0</p>')))
     dados=request.vars
-    print(dados.keys())
     hardware=db(db.hardwares.id==dados['idh']).select().first()
     if(hardware):
         if(['hora', 'senha', 'idh', 'valor', 'data', 'ids']==dados.keys()):
