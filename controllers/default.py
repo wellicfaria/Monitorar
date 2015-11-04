@@ -39,12 +39,12 @@ def portal():
     else:
 
         atual = datetime.strptime(request.args[0], '%Y-%m-%d').date()
-        final = datetime.strptime(request.args[1], '%Y-%m-%d').date()
+        final = datetime.strptime(request.args[1], '%Y-%m-%d').date() #Convertendo para data
 
     leituras=db((db.leituras.data_leitura<=atual) & (db.leituras.data_leitura>=final) ).select()
     datas_de_leituras= db((db.leituras.data_leitura<=atual) & (db.leituras.data_leitura>=final) ).select(db.leituras.data_leitura, distinct=True)
 
-   
+    
   
     form = SQLFORM.factory(
         Field('date_atual', type='date'  ,default=atual ,requires=[IS_NOT_EMPTY(),IS_DATE(format=T('%d/%m/%Y'))]),
