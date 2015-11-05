@@ -20,7 +20,7 @@ if request.is_local:
     db = DAL('sqlite://storage.db')
 else:
     #/Quando o sistema esta no servidor do pythonanywhere, o mesmo utiliza mysql
-    db = DAL('mysql://monitorar:ar123@monitorar.mysql.pythonanywhere-services.com/monitorar$monitorar',fake_migrate=False)
+    db = DAL('mysql://monitorar:ar123@monitorar.mysql.pythonanywhere-services.com/monitorar$monitorar',migrate=False,fake_migrate=False)
 
 
 
