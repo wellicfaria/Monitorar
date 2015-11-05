@@ -191,8 +191,8 @@ def salvar_dados():
                     hardware=dados['idh'],
                     sensor=dados['ids'],
                     valor=dados['valor'],
-                    data_leitura=dados['data'],
-                    hora_leitura=dados['hora']
+                    data_leitura=date.today(),
+                    hora_leitura=datetime.now().time()
                     )
                 if(insersao>0):
                     resposta=HTML(BODY('<ok>', XML('<p>4</p>')))
