@@ -169,7 +169,7 @@
 'Statistics': 'Estatísticas',
 'Stylesheet': 'Folha de estilo',
 'submit': 'enviar',
-'Submit': 'Submit',
+'Submit': 'Enviar',
 'Support': 'Suporte',
 'Sure you want to delete this object?': 'Está certo(a) que deseja apagar este objeto?',
 'Table': 'Tabela',
