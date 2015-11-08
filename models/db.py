@@ -20,7 +20,7 @@ if request.is_local:
     db = DAL('sqlite://storage.db')
 else:
     #/Quando o sistema esta no servidor do pythonanywhere, o mesmo utiliza mysql
-    db = DAL('mysql://monitorar:ar123@monitorar.mysql.pythonanywhere-services.com/$default')
+    db = DAL('mysql://monitorar:ar123@monitorar.mysql.pythonanywhere-services.com/monitorar$monitorar',migrate=False,fake_migrate=False)
 
 
 
@@ -111,12 +111,15 @@ auth.settings.reset_password_requires_verification = True
 
 ## after defining tables, uncomment below to enable auditing
 # auth.enable_record_versioning(db)
+T.force('pt-br')
 
 db.define_table('sensor',
     Field('tipo_sensor', type='string'),
     Field('unidade', type='string'),
     format='%(tipo_sensor)s'
     )
+
+db.sensor.tipo_sensor.requires = IS_IN_SET(['METANO','MONOXIDO DE CARBONO'],error_message='Escolha um tipo para a autoridade!')
 
 db.define_table('hardwares',
     Field('descricao', type='string'),

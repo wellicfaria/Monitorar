@@ -9,7 +9,8 @@
 #########################################################################
 
 #Importação de Bibliotecas
-from datetime import date #Manipulação de datas
+from datetime import date
+from datetime import datetime #Manipulação de datas
 
 def index():
     """
@@ -29,20 +30,38 @@ def index():
 @auth.requires_login()
 def portal():
     #formulário para setar o filto para aprententar os dados
-    atual = date.today()
-    final = date.fromordinal(atual.toordinal()-7) 
-    leituras=db((db.leituras.data_leitura<=atual) & (db.leituras.data_leitura>=final) & (db.leituras.hardware.cidade==auth.user.cidade)).select()
+    
+    usuario=db(db.auth_user.id==auth.user).select().last()
+    
+    if len(request.args)==0:
+        atual = date.today()
+        final = date.fromordinal(atual.toordinal()-7)
+    else:
+
+        atual = datetime.strptime(request.args[0], '%Y-%m-%d').date()
+        final = datetime.strptime(request.args[1], '%Y-%m-%d').date() #Convertendo para data
+
+    leituras=db((db.leituras.data_leitura<=atual) & (db.leituras.data_leitura>=final) ).select()
+    datas_de_leituras= db((db.leituras.data_leitura<=atual) & (db.leituras.data_leitura>=final) ).select(db.leituras.data_leitura, distinct=True)
+
+    
+  
     form = SQLFORM.factory(
-        Field('date_atual', default=atual ,requires=[IS_NOT_EMPTY(),IS_DATE()]),
-        Field('date_final', default=final ,requires=[IS_NOT_EMPTY(),IS_DATE()])
+        Field('date_atual', type='date'  ,default=atual ,requires=[IS_NOT_EMPTY(),IS_DATE(format=T('%d/%m/%Y'))]),
+        Field('date_final', type='date' ,default=final ,requires=[IS_NOT_EMPTY(),IS_DATE(format=T('%d/%m/%Y'))])
         )
 
     #Grafico de linha
     dados_do_grafico_metano=[]
-    dados_do_grafico_monoxido_de_carbono=[]
+    dados_do_grafico_metano.append(['Hora','Valor'])
+    
+    dados_do_grafico_monoxido_de_carbono=[] 
+    dados_do_grafico_monoxido_de_carbono.append(['Hora','Valor'])
+
+
     for dado in leituras:
         aux = []
-        aux.append(dado.hora_leitura)
+        aux.append(dado.data_leitura.strftime("%d/%m/%y")+" "+dado.hora_leitura.strftime("%H:%M:%S"))
         aux.append(dado.valor)
         if dado.sensor.tipo_sensor.upper() =='METANO':
             dados_do_grafico_metano.append(aux)
@@ -52,19 +71,73 @@ def portal():
     grafico_metano=XML(dados_do_grafico_metano)
     grafico_monoxido_de_carbono=XML(dados_do_grafico_monoxido_de_carbono)
 
-    if form.process().accepted:
-        response.flash = 'form accepted'
-        leituras=db((db.leituras.data_leitura<=form.vars.date_atual) & (db.leituras.data_leitura>=form.vars.date_final)).select()
-    elif form.errors:
-        response.flash = 'form has errors'
 
-
-
-    nome=db(db.auth_user.id==auth.user).select().last()
-
-    #retorno
+    #Tabela de maximo e minino
     
-    return {'nome':nome.first_name,'form':form,'leituras':leituras,'grafico_metano':grafico_metano,'grafico_monoxido_de_carbono':grafico_monoxido_de_carbono}
+    #Formato: [ ['Data',Maximo, Minino], ['Data',Maximo, Minino] ...]
+
+    #Tabela de Metano
+    tabela_metano=[]
+    grafico_max_min_metano=[]
+    grafico_max_min_metano.append(["Data","Maximo","Minimo"])
+
+    for data in datas_de_leituras:
+        leituras_diarias=db((db.leituras.data_leitura==data.data_leitura)&(db.leituras.sensor==db.sensor.id)&(db.sensor.tipo_sensor=='METANO')).select(db.leituras.valor)
+        if len(leituras_diarias)>0:
+            aux = []
+          
+            aux.append(data.data_leitura.strftime('%d/%m/%y'))
+            valor_maximo= max(leituras_diarias)
+            valor_minimo= min(leituras_diarias)
+            aux.append(valor_maximo.valor)
+            aux.append(valor_minimo.valor)
+            tabela_metano.append(aux)
+            grafico_max_min_metano.append(aux)
+        grafico_max_min_metano=XML(grafico_max_min_metano)
+
+    #Tabela de Monoxido de Carbono
+    tabela_monoxido_de_carbono=[]
+    grafico_max_min_monoxido=[]
+    grafico_max_min_monoxido.append(["Data","Maximo","Minimo"])
+    for data in datas_de_leituras:
+
+        leituras_diarias=db((db.leituras.data_leitura==data.data_leitura)&(db.leituras.sensor==db.sensor.id)&(db.sensor.tipo_sensor=='MONOXIDO DE CARBONO')).select(db.leituras.valor)
+        if len(leituras_diarias)>0:
+            aux = []
+          
+            aux.append(data.data_leitura.strftime('%d/%m/%y'))
+            valor_maximo= max(leituras_diarias)
+            valor_minimo= min(leituras_diarias)
+            aux.append(valor_maximo.valor)
+            aux.append(valor_minimo.valor)
+            tabela_monoxido_de_carbono.append(aux)
+            grafico_max_min_monoxido.append(aux)
+        grafico_max_min_monoxido=XML(grafico_max_min_metano)
+
+    #Formulário de entrada de datas para filtro. 
+    if form.process().accepted:
+        response.flash = 'Filtrando os dados ....'
+        args = []
+        args.append(str(form.vars.date_atual))
+        args.append(str(form.vars.date_final))
+        redirect(URL('portal', args=tuple(args)))
+    elif form.errors:
+        response.flash = 'Datas inválidas'
+    
+    #Parametros de Retorno da função para gerar a portal
+    retorno = {}
+    retorno.update({'nome':usuario.first_name}) #Nome do Usuário Logado
+    retorno.update({'form':form}) #Formulário para setar a data para filtro de leituras
+    retorno.update({'leituras':leituras}) #Leituras filtradas para apresentar na view
+    retorno.update({'grafico_metano':grafico_metano}) #Dados para construção do gráfico de metano
+    retorno.update({'grafico_monoxido_de_carbono':grafico_monoxido_de_carbono}) #Dados para construção do gráfico de Monixido de Carbono
+    retorno.update({'tabela_metano':tabela_metano}) #Dados de Maxima e minimo sensor de metano
+    retorno.update({'tabela_monoxido_de_carbono':tabela_monoxido_de_carbono}) #Dados de Maxima e minimo sensor de Monoxido de carbono 
+    retorno.update({'grafico_max_min_metano':grafico_max_min_metano})
+    retorno.update({'grafico_max_min_monoxido':grafico_max_min_monoxido})
+    
+    #Retorna os dados para View
+    return retorno
 
 
 
@@ -98,7 +171,6 @@ def download():
     """
     return response.download(request, db)
 
-
 def call():
     """
     exposes services. for example:
@@ -122,7 +194,6 @@ def salvar_dados():
 
     resposta=HTML(BODY('<erro>', XML('<p>0</p>')))
     dados=request.vars
-    print(dados.keys())
     hardware=db(db.hardwares.id==dados['idh']).select().first()
     if(hardware):
         if(['hora', 'senha', 'idh', 'valor', 'data', 'ids']==dados.keys()):
@@ -131,8 +202,8 @@ def salvar_dados():
                     hardware=dados['idh'],
                     sensor=dados['ids'],
                     valor=dados['valor'],
-                    data_leitura=dados['data'],
-                    hora_leitura=dados['hora']
+                    data_leitura=date.today(),
+                    hora_leitura=datetime.now().time()
                     )
                 if(insersao>0):
                     resposta=HTML(BODY('<ok>', XML('<p>4</p>')))
