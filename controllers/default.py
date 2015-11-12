@@ -93,7 +93,9 @@ def portal():
             aux.append(valor_minimo.valor)
             tabela_metano.append(aux)
             grafico_max_min_metano.append(aux)
-        grafico_max_min_metano=XML(grafico_max_min_metano)
+        
+        aux2=grafico_max_min_metano
+        grafico_max_min_metano=XML(aux2)
 
     #Tabela de Monoxido de Carbono
     tabela_monoxido_de_carbono=[]
@@ -112,7 +114,9 @@ def portal():
             aux.append(valor_minimo.valor)
             tabela_monoxido_de_carbono.append(aux)
             grafico_max_min_monoxido.append(aux)
-        grafico_max_min_monoxido=XML(grafico_max_min_metano)
+        
+        aux2=grafico_max_min_monoxido
+        grafico_max_min_monoxido=XML(aux2)
 
     #Formulário de entrada de datas para filtro. 
     if form.process().accepted:
