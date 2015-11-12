@@ -176,7 +176,7 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <a class="navbar-brand" href="index.html">MonitorAR  Ola {{=nome}}</a>
+                <a class="navbar-brand" href="index.html">MonitorAR  Olá {{=nome}}</a>
             </div>
             <!-- /.navbar-header -->
 
@@ -186,7 +186,7 @@
                         <i class="fa fa-user fa-fw"></i>  <i class="fa fa-caret-down"></i>
                     </a>
                     <ul class="dropdown-menu dropdown-user">
-                        <li><a href="{{=URL(c='default', f='user',args=['profile'])}}"><i class="fa fa-user fa-fw"></i> User Profile</a>
+                        <li><a href="{{=URL(c='default', f='user',args=['profile'])}}"><i class="fa fa-user fa-fw"></i> Perfil do usuário</a>
                         </li>
                         <li><a href="{{=URL(c='default', f='user',args=['change_password'])}}"><i class="fa fa-gear fa-fw"></i> Alterar Senha</a>
                         </li>
@@ -205,13 +205,13 @@
                     <ul class="nav" id="side-menu">
                         
                         <li>
-                            <a href="index.html"><i class="fa fa-balance-scale fa-fe"></i> Medições</a>
+                            <a href="#graphic"><i class="fa fa-balance-scale fa-fe"></i> Medições</a>
                         </li>
                         <li>
-                            <a href="index.html"><i class="fa fa-map-marker fa-fe"></i> Mapeamento</a>
+                            <a href="#map"><i class="fa fa-map-marker fa-fe"></i> Mapeamento</a>
                         </li>
                         <li>
-                            <a href="index.html"><i class="fa fa-bell fa-fe"></i> Alertas</a>
+                            <a href="#alerts"><i class="fa fa-bell fa-fe"></i> Alertas</a>
                         </li>
                     </ul>
                 </div>
@@ -223,26 +223,24 @@
         <div id="page-wrapper">
             <div class="row">
                 <div class="col-lg-12">
-                    <h1 class="page-header">Gases</h1>
+                    <h1 class="page-header">Monitoramento da qualidade do ar</h1>
                 </div>
                 <!-- /.col-lg-12 -->
             </div>
 
-                    <div class="panel panel-default">
+            <div class="panel panel-default">
                      {{=form.custom.begin}}
                             <div class="row">
                                 <div class="col-md-4">Inicio: <div>{{=form.custom.widget.date_atual}}</div></div>
                                 <div class="col-md-4">Fim: <div>{{=form.custom.widget.date_final}}</div></div>
                                 <div class="col-md-4">
-                                </br>
-                                <button type="submit" class="btn btn-default"><span class="glyphicon glyphicon-filter" aria-hidden="true"></span></button>
+                                    </br>
+                                    <button type="submit" class="btn btn-default"><span class="glyphicon glyphicon-filter" aria-hidden="true"></span></button>
                                 </div>
                             </div>
-                        {{=form.custom.end}}
-    
-                    </div>
-
-
+                    {{=form.custom.end}}
+            </div>
+        
             <!-- /.row -->
             <div class="row">
                 <div class="col-lg-3 col-md-6">
@@ -268,7 +266,7 @@
                                     <i class="fa fa-cloud fa-5x"></i>
                                 </div>
                                 <div class="col-xs-9 text-right">
-                                    <div class="lead">Monóxido de Carbono</div>
+                                    <div class="lead">Monóxido de Carbono </div>
                                 </div>
                             </div>
                         </div>
@@ -277,9 +275,8 @@
 
             </div>
             <!-- /.row -->
-            <div class="row">
-                <div class="col-lg-8">
-                    <div class="panel panel-default">
+            
+                    <div class="panel panel-default" id = "graphic">
                         <div class="panel-heading">
                             <i class="fa fa-bar-chart-o fa-fw"></i> Variação da quantidade de poluentes
                             
@@ -335,7 +332,7 @@
                         <!-- /.panel-body -->
                    
                     </div>
-                         <div class="panel panel-default">
+                    <div class="panel panel-default">
                         <div class="panel-heading">
                             <i class="fa fa-bar-chart-o fa-fw"></i> Máximas e Mínimas - Monoxido de Carbono
                         </div>
@@ -379,22 +376,20 @@
                     </div>
 
                     <!-- /.panel -->x
-                    <div class="panel panel-default">
+                    <div class="panel panel-default" id = "map">
                         <div class="panel-heading"> 
                             <i class="fa fa-map-marker fa-fw"></i> Mapa - Localização do Hardware
                         </div>
                         <!-- /.panel-heading -->
                         <div class="panel-body">
-                            <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3692.5828082300472!2d-45.7004963853695!3d-22.255902420563366!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x94cba24147a0dcaf%3A0xf38070283bd7e777!2sAv.+Jo%C3%A3o+de+Camargo%2C+Santa+Rita+do+Sapuca%C3%AD+-+MG%2C+37540-000!5e0!3m2!1spt-BR!2sbr!4v1446118633439" width="600" height="450" frameborder="0" style="border:0" allowfullscreen></iframe>
+                           
+                            <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d6210.177440517271!2d-45.69676248397836!3d-22.255493278783106!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0000000000000000%3A0xe8097acbe4b45918!2sInatel+Competence+Center!5e0!3m2!1spt-BR!2sbr!4v1447355682071" width="100%" height="450" frameborder="0" style="border:0" allowfullscreen></iframe>
                            
                         </div>
                         <!-- /.panel-body -->
                     </div>
-                    <!-- /.panel -->
-                </div>
-                <!-- /.col-lg-8 -->
-                <div class="col-lg-4">
-                    <div class="panel panel-default">
+
+                    <div class="panel panel-default" id = "alerts">
                         <div class="panel-heading">
                             <i class="fa fa-bell fa-fw"></i> Alertas
                         </div>
@@ -409,11 +404,7 @@
                             <div class="list-group">
                                 <img src="http://4.bp.blogspot.com/_vMhPKJ7cnT4/TNTMrHu-urI/AAAAAAAAAH0/RWdl1aSLa6s/s640/giroflex.gif" height="150" width="250"> 
                              </div>
-                        </div>
-                        <!-- /.panel-body -->
-                    </div>
-                    <!-- /.panel -->
-                    <!-- /.panel -->
+                    
                     
     <!-- /#wrapper -->
 
