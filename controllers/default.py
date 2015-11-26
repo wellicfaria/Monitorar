@@ -82,15 +82,18 @@ def portal():
     grafico_max_min_metano.append(["Data","Maximo","Minimo"])
 
     for data in datas_de_leituras:
-        leituras_diarias=db((db.leituras.data_leitura==data.data_leitura)&(db.leituras.sensor==db.sensor.id)&(db.sensor.tipo_sensor=='METANO')).select(db.leituras.valor)
+        leituras_diarias=db((db.leituras.data_leitura==data.data_leitura)&(db.leituras.sensor==db.sensor.id)&(db.sensor.tipo_sensor=='METANO')).select()
+        valores=[]
+        for leitura in leituras_diarias:
+            valores.append(leitura.leituras.valor)
         if len(leituras_diarias)>0:
             aux = []
           
             aux.append(data.data_leitura.strftime('%d/%m/%y'))
-            valor_maximo= max(leituras_diarias)
-            valor_minimo= min(leituras_diarias)
-            aux.append(valor_maximo.valor)
-            aux.append(valor_minimo.valor)
+            valor_maximo= max(valores)
+            valor_minimo= min(valores)
+            aux.append(valor_maximo)
+            aux.append(valor_minimo)
             tabela_metano.append(aux)
             grafico_max_min_metano.append(aux)
         
@@ -103,15 +106,18 @@ def portal():
     grafico_max_min_monoxido.append(["Data","Maximo","Minimo"])
     for data in datas_de_leituras:
 
-        leituras_diarias=db((db.leituras.data_leitura==data.data_leitura)&(db.leituras.sensor==db.sensor.id)&(db.sensor.tipo_sensor=='MONOXIDO DE CARBONO')).select(db.leituras.valor)
+        leituras_diarias=db((db.leituras.data_leitura==data.data_leitura)&(db.leituras.sensor==db.sensor.id)&(db.sensor.tipo_sensor=='MONOXIDO DE CARBONO')).select()
+        valores=[]
+        for leitura in leituras_diarias:
+            valores.append(leitura.leituras.valor)
         if len(leituras_diarias)>0:
             aux = []
           
             aux.append(data.data_leitura.strftime('%d/%m/%y'))
-            valor_maximo= max(leituras_diarias)
-            valor_minimo= min(leituras_diarias)
-            aux.append(valor_maximo.valor)
-            aux.append(valor_minimo.valor)
+            valor_maximo= max(valores)
+            valor_minimo= min(valores)
+            aux.append(valor_maximo)
+            aux.append(valor_minimo)
             tabela_monoxido_de_carbono.append(aux)
             grafico_max_min_monoxido.append(aux)
         
