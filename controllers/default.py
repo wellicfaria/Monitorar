@@ -133,6 +133,9 @@ def portal():
         redirect(URL('portal', args=tuple(args)))
     elif form.errors:
         response.flash = 'Datas inválidas'
+
+    id_alerta=db(db.sensor.tipo_sensor=='ALERTA').select().last()
+    numero_de_alertas=db(db.leituras.id == id_alerta.id).count()
     
     #Parametros de Retorno da função para gerar a portal
     retorno = {}
@@ -145,6 +148,7 @@ def portal():
     retorno.update({'tabela_monoxido_de_carbono':tabela_monoxido_de_carbono}) #Dados de Maxima e minimo sensor de Monoxido de carbono 
     retorno.update({'grafico_max_min_metano':grafico_max_min_metano})
     retorno.update({'grafico_max_min_monoxido':grafico_max_min_monoxido})
+    retorno.update({'numero_de_alertas':numero_de_alertas})
     
     #Retorna os dados para View
     return retorno
@@ -217,6 +221,32 @@ def salvar_dados():
                     )
                 if(insersao>0):
                     resposta=HTML(BODY('<ok>', XML('<p>4</p>')))
+                    limiteMaxMC=488
+                    limiteMet=200
+                    sensor=db(db.sensor.id==dados['ids']).select().last()
+
+                    #Enviando Alerta Metano
+                    if sensor.tipo_sensor=='METANO':
+                        if(dados['valor']>limiteMet):
+                            id_alerta=db(db.sensor.tipo_sensor=='ALERTA').select().last()
+                            insersao=db.leituras.insert(
+                             hardware=dados['idh'],
+                             sensor=id_alerta.id,
+                             valor=dados['valor'],
+                             data_leitura=date.today(),
+                             hora_leitura=datetime.now().time()
+                            )
+                    #Enviando Alerta MONOXIDO DE CARBONO
+                    if sensor.tipo_sensor=='MONOXIDO DE CARBONO':
+                        if(dados['valor']>limiteMaxMC):
+                            id_alerta=db(db.sensor.tipo_sensor=='ALERTA').select().last()
+                            insersao=db.leituras.insert(
+                             hardware=dados['idh'],
+                             sensor=id_alerta.id,
+                             valor=dados['valor'],
+                             data_leitura=date.today(),
+                             hora_leitura=datetime.now().time()
+                            )
                 else:
                     resposta=HTML(BODY('<erro>', XML('<p>5</p>')))
             else:

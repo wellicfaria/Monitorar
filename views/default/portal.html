@@ -122,9 +122,9 @@
     
 
 
-       <script type="text/javascript">
+    <script type="text/javascript">
 
-      google.load("visualization", "1.1", {packages:["bar"]});
+      google.load("visualization", "1", {packages:["bar"]});
       google.setOnLoadCallback(drawChart1);
       function drawChart1() {
         var data2 = google.visualization.arrayToDataTable({{=grafico_max_min_metano}});
@@ -139,12 +139,12 @@
 
         chart2.draw(data2, options2);
       }
+      </script>
     
-    </script>
 
 
-       <script type="text/javascript">
-      google.load("visualization", "1.1", {packages:["bar"]});
+    <script type="text/javascript">
+      google.load("visualization", "1", {packages:["bar"]});
       google.setOnLoadCallback(drawChart2);
       function drawChart2() {
         var data1 = google.visualization.arrayToDataTable({{=grafico_max_min_monoxido}});
@@ -160,6 +160,10 @@
         chart1.draw(data1, options1);
       }
     </script>
+
+
+
+
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
     <!--[if lt IE 9]>
@@ -412,13 +416,11 @@
                         <div class="panel-body">
                             <div class="list-group">
                                 <p href="#" class="list-group-item">
-                                    <i class="fa fa-comment fa-fw"></i> Numero de alertas emitidos:
+                                           <img src="http://4.bp.blogspot.com/_vMhPKJ7cnT4/TNTMrHu-urI/AAAAAAAAAH0/RWdl1aSLa6s/s640/giroflex.gif" height="60" width="100"> </i> Número de alertas emitidos:{{=numero_de_alertas}}
                                 </p>
                             </div>
                             <!-- /.list-group -->
-                            <div class="list-group">
-                                <img src="http://4.bp.blogspot.com/_vMhPKJ7cnT4/TNTMrHu-urI/AAAAAAAAAH0/RWdl1aSLa6s/s640/giroflex.gif" height="150" width="250"> 
-                             </div>
+                           
                     
                     
     <!-- /#wrapper -->
